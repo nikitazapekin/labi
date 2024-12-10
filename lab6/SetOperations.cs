@@ -18,6 +18,13 @@ namespace lab6
                 elements[^1] = element; // Add the element at the end
             }
         }
+        public void Update(int index, int newValue)
+        {
+            if (index >= 0 && index < elements.Length) // Ensure index is valid
+            {
+                elements[index] = newValue;
+            }
+        }
 
         public void Remove(int element)
         {
