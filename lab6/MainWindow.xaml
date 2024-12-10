@@ -1,0 +1,47 @@
+﻿<Window x:Class="lab6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab6"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Таблица для отображения множеств -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+            <GroupBox Header="Множество 1" Margin="5" Width="350">
+                <DataGrid x:Name="Set1DataGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Элемент" Binding="{Binding}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <GroupBox Header="Множество 2" Margin="5" Width="350">
+                <DataGrid x:Name="Set2DataGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Элемент" Binding="{Binding}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </StackPanel>
+
+        <!-- Кнопки управления -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Margin="0,10,0,0">
+            <Button Content="Добавить элементы" Width="150" Margin="5" Click="AddDefaultElements_Click" />
+            <Button Content="Объединение" Width="100" Margin="5" Click="UnionSets_Click" />
+            <Button Content="Пересечение" Width="100" Margin="5" Click="IntersectSets_Click" />
+            <Button Content="Разность" Width="100" Margin="5" Click="DifferenceSets_Click" />
+            <Button Content="Сортировка" Width="100" Margin="5" Click="SortSet_Click" />
+            <Button Content="Сравнить" Width="100" Margin="5" Click="CompareElements_Click" />
+        </StackPanel>
+    </Grid>
+
+
+</Window>
