@@ -50,6 +50,57 @@ namespace lab6
                 MessageBox.Show("Введите корректное число.");
             }
         }
+        /*
+          private void DeleteElement_Click(object sender, RoutedEventArgs e)
+          {
+              if (int.TryParse(DeleteTextBox.Text, out int newElement))
+              {
+                  var selectedSet = ((ComboBoxItem)SetSelector.SelectedItem)?.Content.ToString();
+
+                  if (selectedSet == "Множество 1")
+                  {
+                      set1.Remove(newElement);
+                  }
+                  else if (selectedSet == "Множество 2")
+                  {
+                      set2.Remove(newElement);
+                  }
+
+                  UpdateListBoxes();
+                  DeleteTextBox.Clear();
+              }
+              else
+              {
+                  MessageBox.Show("Введите корректное число.");
+              }
+          }
+
+          */
+
+        private void DeleteElement_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(DeleteTextBox.Text, out int index))
+            {
+                var selectedSet = ((ComboBoxItem)SetSelector.SelectedItem)?.Content.ToString();
+
+                if (selectedSet == "Множество 1")
+                {
+                    set1.RemoveAt(index);   
+                }
+                else if (selectedSet == "Множество 2")
+                {
+                    set2.RemoveAt(index);   
+                }
+
+                UpdateListBoxes();
+                DeleteTextBox.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Введите корректный индекс.");
+            }
+        }
+
         private void EditElement_Click(object sender, RoutedEventArgs e)
         {
             string indexText = ElementIndexTextBox.Text;
@@ -105,13 +156,13 @@ namespace lab6
 
         void CompareElements_Click(object sender, RoutedEventArgs e)
         {
-            // Преобразуем множества в массивы
+           
             int[] set1Array = set1.ToArray();
             int[] set2Array = set2.ToArray();
 
             if (set1Array.Length > 0 && set2Array.Length > 0)
             {
-                // Сравнение элементов массива 1
+             
                 for (int i = 0; i < set1Array.Length; i++)
                 {
                     if (i < set1Array.Length - 1)
@@ -134,7 +185,7 @@ namespace lab6
                     }
                 }
 
-                // Для последнего элемента сравниваем с первым
+              
                 int lastElement1 = set1Array[set1Array.Length - 1];
                 int firstElement1 = set1Array[0];
                 if (lastElement1 > firstElement1)
@@ -150,7 +201,7 @@ namespace lab6
                     MessageBox.Show($"Элемент {lastElement1} меньше {firstElement1}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
-                // Сравнение элементов массива 2
+             
                 for (int i = 0; i < set2Array.Length; i++)
                 {
                     if (i < set2Array.Length - 1)
@@ -173,7 +224,7 @@ namespace lab6
                     }
                 }
 
-                // Для последнего элемента сравниваем с первым
+               
                 int lastElement2 = set2Array[set2Array.Length - 1];
                 int firstElement2 = set2Array[0];
                 if (lastElement2 > firstElement2)

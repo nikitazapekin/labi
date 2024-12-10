@@ -34,6 +34,11 @@
             <TextBox x:Name="NewValueTextBox" Width="50" Margin="5" HorizontalAlignment="Left" />
             <Button Content="Редактировать" Width="100" Margin="5" Click="EditElement_Click" />
 
+
+            <TextBox x:Name="DeleteTextBox" Width="50" Margin="5" HorizontalAlignment="Left" />
+            <Button Content="Удалить" Width="100" Margin="5" Click="DeleteElement_Click" />
+            
+            
             <Button Content="Объединение" Width="100" Margin="5" Click="UnionSets_Click" />
             <Button Content="Пересечение" Width="100" Margin="5" Click="IntersectSets_Click" />
             <Button Content="Разность" Width="100" Margin="5" Click="DifferenceSets_Click" />

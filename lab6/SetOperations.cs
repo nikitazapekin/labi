@@ -11,7 +11,15 @@ namespace lab6
         public int this[int index] => elements[index];
 
 
+        public CustomSet(string firstName, string lastName, DateTime dateOfBirth)
+        {
+            
+        }
 
+        public CustomSet()
+        {
+            
+        }
 
 
         public static bool operator ==(CustomSet left, CustomSet right)
@@ -57,30 +65,46 @@ namespace lab6
 
         public void Add(int element)
         {
-            if (Array.IndexOf(elements, element) < 0)  
+            if (Array.IndexOf(elements, element) < 0)
             {
-                Array.Resize(ref elements, elements.Length + 1);
-                elements[^1] = element;  
+                Array.Resize(ref elements, elements.Length + 1);  
+                elements[elements.Length - 1] = element; 
             }
         }
         public void Update(int index, int newValue)
         {
-            if (index >= 0 && index < elements.Length) // Ensure index is valid
+            if (index >= 0 && index < elements.Length) 
             {
                 elements[index] = newValue;
             }
         }
-
+        /*
         public void Remove(int element)
         {
             int index = Array.IndexOf(elements, element);
-            if (index >= 0) // If the element exists
+            if (index >= 0)
+            {
+               
+                for (int i = index; i < elements.Length - 1; i++)
+                {
+                    elements[i] = elements[i + 1];
+                }
+
+            
+                Array.Resize(ref elements, elements.Length - 1);
+            }
+        }
+        */
+
+        public void RemoveAt(int index)
+        {
+            if (index >= 0 && index < elements.Length)
             {
                 for (int i = index; i < elements.Length - 1; i++)
                 {
-                    elements[i] = elements[i + 1]; // Shift elements left
+                    elements[i] = elements[i + 1];  
                 }
-                Array.Resize(ref elements, elements.Length - 1); // Resize array to remove the last element
+                Array.Resize(ref elements, elements.Length - 1);  
             }
         }
 
@@ -103,7 +127,7 @@ namespace lab6
             var result = new CustomSet();
             foreach (var elem in elements)
             {
-                if (Array.IndexOf(other.elements, elem) >= 0) // Check if element exists in the other set
+                if (Array.IndexOf(other.elements, elem) >= 0)  
                 {
                     result.Add(elem);
                 }
@@ -116,7 +140,7 @@ namespace lab6
             var result = new CustomSet();
             foreach (var elem in elements)
             {
-                if (Array.IndexOf(other.elements, elem) < 0) // Element doesn't exist in the other set
+                if (Array.IndexOf(other.elements, elem) < 0) 
                 {
                     result.Add(elem);
                 }
@@ -126,7 +150,7 @@ namespace lab6
 
         public void Sort()
         {
-            // Simple Bubble Sort for sorting the array
+          
             for (int i = 0; i < elements.Length - 1; i++)
             {
                 for (int j = i + 1; j < elements.Length; j++)
