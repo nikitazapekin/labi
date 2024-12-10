@@ -1,0 +1,49 @@
+﻿<Window x:Class="lab3zadanie2.MainWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab3zadanie2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1250" Width="1800">
+    <Grid>
+        <DataGrid Name="matrixGrid" AutoGenerateColumns="True" 
+                  HorizontalAlignment="Left" VerticalAlignment="Top" 
+                  Height="320" Width="549" Margin="42,143,0,0" FontSize="20"
+                  IsReadOnly="False" 
+                  CurrentCellChanged="DataGrid_CurrentCellChanged"
+                  CellEditEnding="matrixGrid_CellEditEnding"/>
+
+        <DataGrid Name="compressedMatrixGrid" AutoGenerateColumns="True" 
+                  HorizontalAlignment="Left" VerticalAlignment="Top" 
+                  Height="320" Width="549" Margin="42,503,0,0" FontSize="20"
+                  IsReadOnly="True" RenderTransformOrigin="1.022,0.616"/>
+        <TextBlock Name="resultText" HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" Margin="120,220,0,0" 
+                   Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Margin="764,108,0,0" 
+                   TextWrapping="Wrap" Text="Количество строк" 
+                   VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="764,227,0,0" 
+                   TextWrapping="Wrap" Text="Количество колонок" 
+                   VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="matrixRows" HorizontalAlignment="Left" 
+                  Margin="1016,108,0,0" TextWrapping="Wrap" 
+                  VerticalAlignment="Top" Width="120" 
+                  TextChanged="matrixRows_TextChanged" FontSize="20"/>
+        <TextBox x:Name="matrixColumns" HorizontalAlignment="Left" 
+                  Margin="1016,226,0,0" TextWrapping="Wrap" 
+                  VerticalAlignment="Top" Width="120" FontSize="20"/>
+        <Button Content="Сгенерировать" HorizontalAlignment="Left" 
+                Margin="1252,108,0,0" VerticalAlignment="Top" 
+                Height="54" Width="219" 
+                Click="GenerateMatrix_Click" FontSize="20"/>
+        <Button Content="Ввести свои значения"  Click="InputButton_Click"   
+                FontSize="20" HorizontalAlignment="Left" Margin="1476,108,0,0" 
+                VerticalAlignment="Top" Height="54" Width="248"/>
+        <Button Content="Уплотнить" HorizontalAlignment="Left" 
+            Margin="1252,218,0,0" VerticalAlignment="Top" 
+            Height="54" Width="219" 
+            Click="CalculateButton_Click" FontSize="20"/>
+    </Grid>
+</Window>
