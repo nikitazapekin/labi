@@ -48,7 +48,7 @@ namespace lab5
                 string trimmedSentence = sentence.TrimStart();
                 if (trimmedSentence.StartsWith("-"))
                 {
-                    // Если предложение начинается с тире, добавляем его в результат
+                
                     result += trimmedSentence + Environment.NewLine;
                 }
             }
@@ -56,23 +56,75 @@ namespace lab5
             return result;
         }
 
+
         private string ExtractSentencesUsingStringBuilder(string text)
         {
             StringBuilder result = new StringBuilder();
-            string[] sentences = text.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            StringBuilder currentSentence = new StringBuilder();
+            bool isSentenceValid = false;
 
-            foreach (string sentence in sentences)
+            foreach (char c in text)
             {
-                string trimmedSentence = sentence.TrimStart();
-                if (trimmedSentence.StartsWith("-"))
+                if (c == '.')
                 {
-                    // Если предложение начинается с тире, добавляем его в StringBuilder
-                    result.AppendLine(trimmedSentence);
+                    // Проверяем, начинается ли предложение с '-'
+                    if (isSentenceValid)
+                    {
+                        result.AppendLine(currentSentence.ToString().Trim());
+                    }
+                    currentSentence.Clear(); // Очищаем для нового предложения
+                    isSentenceValid = false; // Сбрасываем флаг
                 }
+                else
+                {
+                    if (!isSentenceValid && c == '-')
+                    {
+                        isSentenceValid = true; // Устанавливаем флаг, что предложение начинается с '-'
+                    }
+                    currentSentence.Append(c); // Добавляем символ в предложение
+                }
+            }
+
+            // Проверяем последнее предложение (если текст не заканчивается точкой)
+            if (isSentenceValid)
+            {
+                result.AppendLine(currentSentence.ToString().Trim());
             }
 
             return result.ToString();
         }
+
+        /*
+        private string ExtractSentencesUsingStringBuilder(string text)
+        {
+            StringBuilder result = new StringBuilder();
+            StringBuilder currentSentence = new StringBuilder();
+
+            foreach (char c in text)
+            {
+                if (c == '.')
+                {
+                 
+                    if (currentSentence.Length > 0 && currentSentence[0] == '-')
+                    {
+                        result.AppendLine(currentSentence.ToString().Trim());
+                    }
+                    currentSentence.Clear();
+                }
+                else
+                {
+                    currentSentence.Append(c);
+                }
+            }
+ 
+            if (currentSentence.Length > 0 && currentSentence[0] == '-')
+            {
+                result.AppendLine(currentSentence.ToString().Trim());
+            }
+
+            return result.ToString();
+        }
+        */
 
     }
 }
