@@ -1,0 +1,41 @@
+﻿<Window x:Class="lab3zadamie1.MainWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab3zadamie1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1250" Width="1800">
+    <Grid>
+        <Label Content="Укажите количество чисел:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="InputN" HorizontalAlignment="Left" Margin="13,47,0,0" VerticalAlignment="Top" Width="305" Height="26" FontSize="14"/>
+
+        <Button Content="Создать" Click="GenerateButton_Click" HorizontalAlignment="Left" Margin="13,101,0,0" VerticalAlignment="Top" Width="163" Height="30" FontSize="20"/>
+
+        <Label Content="числа:" HorizontalAlignment="Left" Margin="11,153,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <DataGrid ColumnWidth="*" x:Name="DataGridView" HorizontalAlignment="Left" Margin="11,183,0,0"
+                  VerticalAlignment="Top" Height="200" Width="400" FontSize="20"
+                  AutoGenerateColumns="False" CurrentCellChanged="DataGridView_CurrentCellChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Число, Mode=TwoWay}" Header="Элементы" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Номер максимального по модулю элемента:" HorizontalAlignment="Left" Margin="10,386,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="MaxModIndex" HorizontalAlignment="Left" Margin="13,436,0,0" VerticalAlignment="Top" Width="120" FontSize="20" IsReadOnly="True"/>
+
+        <Label Content="Сумма модулей после первого положительного элемента:" HorizontalAlignment="Left" Margin="13,471,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="SumAfterFirstPositive" HorizontalAlignment="Left" Margin="13,520,0,0" VerticalAlignment="Top" Width="120" FontSize="20" IsReadOnly="True"/>
+
+        <Label Content="Преобразованный массив:" HorizontalAlignment="Left" Margin="13,546,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <DataGrid ColumnWidth="*" x:Name="TransformedDataGridView" HorizontalAlignment="Left" Margin="10,744,0,0" VerticalAlignment="Top" Height="200" Width="400" FontSize="20"/>
+
+        <Label Content="Минимальный промежуток (целая часть):" HorizontalAlignment="Left" Margin="13,620,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="MinRange" HorizontalAlignment="Left" Margin="13,650,0,0" VerticalAlignment="Top" Width="120" FontSize="16"/>
+
+        <Label Content="Максимальный промежуток (целая часть):" HorizontalAlignment="Left" Margin="389,617,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="MaxRange" HorizontalAlignment="Left" Margin="406,653,0,0" VerticalAlignment="Top" Width="120" FontSize="16"/>
+
+        <Button Content="Найти" Click="FilterButton_Click" HorizontalAlignment="Left" Margin="13,690,0,0" VerticalAlignment="Top" Width="120" Height="30" FontSize="20"/>
+    </Grid>
+</Window>
