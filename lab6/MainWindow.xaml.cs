@@ -96,28 +96,105 @@ namespace lab6
         private void SortSet_Click(object sender, RoutedEventArgs e)
         {
             set1.Sort();
+            set2.Sort();
             UpdateListBoxes();
             MessageBox.Show($"Отсортированное множество 1: {set1}");
         }
 
-        private void CompareElements_Click(object sender, RoutedEventArgs e)
+
+
+        void CompareElements_Click(object sender, RoutedEventArgs e)
         {
-            if (set1.Count > 0 && set2.Count > 0)
+            // Преобразуем множества в массивы
+            int[] set1Array = set1.ToArray();
+            int[] set2Array = set2.ToArray();
+
+            if (set1Array.Length > 0 && set2Array.Length > 0)
             {
-                var comparisonResult = set1[0].CompareTo(set2[0]);
-                string comparisonMessage = comparisonResult switch
+                // Сравнение элементов массива 1
+                for (int i = 0; i < set1Array.Length; i++)
                 {
-                    0 => "Элементы равны.",
-                    > 0 => "Первый элемент множества 1 больше первого элемента множества 2.",
-                    _ => "Первый элемент множества 1 меньше первого элемента множества 2."
-                };
-                MessageBox.Show(comparisonMessage);
+                    if (i < set1Array.Length - 1)
+                    {
+                        int elem1 = set1Array[i];
+                        int elem2 = set1Array[i + 1];
+
+                        if (elem1 > elem2)
+                        {
+                            MessageBox.Show($"Элемент {elem1} больше {elem2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else if (elem1 == elem2)
+                        {
+                            MessageBox.Show($"Элемент {elem1} равен {elem2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Элемент {elem1} меньше {elem2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                }
+
+                // Для последнего элемента сравниваем с первым
+                int lastElement1 = set1Array[set1Array.Length - 1];
+                int firstElement1 = set1Array[0];
+                if (lastElement1 > firstElement1)
+                {
+                    MessageBox.Show($"Элемент {lastElement1} больше {firstElement1}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (lastElement1 == firstElement1)
+                {
+                    MessageBox.Show($"Элемент {lastElement1} равен {firstElement1}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Элемент {lastElement1} меньше {firstElement1}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+                // Сравнение элементов массива 2
+                for (int i = 0; i < set2Array.Length; i++)
+                {
+                    if (i < set2Array.Length - 1)
+                    {
+                        int elem1 = set2Array[i];
+                        int elem2 = set2Array[i + 1];
+
+                        if (elem1 > elem2)
+                        {
+                            MessageBox.Show($"Элемент {elem1} больше {elem2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else if (elem1 == elem2)
+                        {
+                            MessageBox.Show($"Элемент {elem1} равен {elem2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Элемент {elem1} меньше {elem2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                }
+
+                // Для последнего элемента сравниваем с первым
+                int lastElement2 = set2Array[set2Array.Length - 1];
+                int firstElement2 = set2Array[0];
+                if (lastElement2 > firstElement2)
+                {
+                    MessageBox.Show($"Элемент {lastElement2} больше {firstElement2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (lastElement2 == firstElement2)
+                {
+                    MessageBox.Show($"Элемент {lastElement2} равен {firstElement2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Элемент {lastElement2} меньше {firstElement2}.", "Результат сравнения", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             else
             {
                 MessageBox.Show("Оба множества должны содержать элементы.");
             }
         }
+
 
         private void UpdateListBoxes()
         {

@@ -4,18 +4,63 @@ namespace lab6
 {
     public class CustomSet : IComparable
     {
-        private int[] elements = new int[0]; // Use a simple array for dynamic resizing
+        private int[] elements = new int[0];  
 
         public int Count => elements.Length;
 
         public int this[int index] => elements[index];
 
+
+
+
+
+        public static bool operator ==(CustomSet left, CustomSet right)
+        {
+            if (ReferenceEquals(left, right)) return true;
+            if (left is null || right is null) return false;
+
+            if (left.Count != right.Count) return false;
+
+            for (int i = 0; i < left.Count; i++)
+            {
+                if (left[i] != right[i]) return false;
+            }
+            return true;
+        }
+
+        public static bool operator !=(CustomSet left, CustomSet right)
+        {
+            return !(left == right);
+        }
+
+        public static bool operator >(CustomSet left, CustomSet right)
+        {
+            return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator <(CustomSet left, CustomSet right)
+        {
+            return left.CompareTo(right) < 0;
+        }
+
+        public static bool operator >=(CustomSet left, CustomSet right)
+        {
+            return left.CompareTo(right) >= 0;
+        }
+
+        public static bool operator <=(CustomSet left, CustomSet right)
+        {
+            return left.CompareTo(right) <= 0;
+        }
+
+
+
         public void Add(int element)
         {
-            if (Array.IndexOf(elements, element) < 0) // Check if element already exists
+            if (Array.IndexOf(elements, element) < 0)  
             {
                 Array.Resize(ref elements, elements.Length + 1);
-                elements[^1] = element; // Add the element at the end
+                elements[^1] = element;  
             }
         }
         public void Update(int index, int newValue)
