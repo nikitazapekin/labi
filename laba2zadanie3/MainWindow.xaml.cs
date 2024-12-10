@@ -63,12 +63,17 @@ namespace laba2zadanie3
 
                     // Логика попадания
                     double distance = Math.Sqrt(x * x + y * y); // Расстояние до центра
+ 
+                   
+
                     bool isInOuterCircle = distance <= r1;      // Точка в пределах внешнего радиуса
                     bool isOutOfInnerCircle = distance > r2;    // Точка за пределами внутреннего радиуса
-                    bool isInValidAngles = (x <= 0 && y >= 0) || (x <= 0 && y <= 0); // Допустимые углы (90°–180°, 270°–360°)
+
+                    // Допустимые углы для попадания: 90°–180° и 270°–360°
+                    bool isInValidAngles = (x <= 0 && y >= 0) || (x >= 0 && y <= 0);
 
                     // Проверяем условия попадания
-                    if (isInOuterCircle && isOutOfInnerCircle && !isInValidAngles)
+                    if (isInOuterCircle && isOutOfInnerCircle && isInValidAngles)
                     {
                         MessageBox.Show("Попал!");
                         countOfStrikes++;
@@ -90,6 +95,7 @@ namespace laba2zadanie3
                 MessageBox.Show($"Произошла ошибка: {ex.Message}");
             }
         }
+
 
         /// <summary>
         /// Обработчик изменения текста (для будущей функциональности)
