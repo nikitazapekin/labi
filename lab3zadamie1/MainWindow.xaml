@@ -28,7 +28,7 @@
         <TextBox x:Name="SumAfterFirstPositive" HorizontalAlignment="Left" Margin="13,520,0,0" VerticalAlignment="Top" Width="120" FontSize="20" IsReadOnly="True"/>
 
         <Label Content="Преобразованный массив:" HorizontalAlignment="Left" Margin="13,546,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <DataGrid ColumnWidth="*" x:Name="TransformedDataGridView" HorizontalAlignment="Left" Margin="10,744,0,0" VerticalAlignment="Top" Height="200" Width="400" FontSize="20"/>
+        <DataGrid ColumnWidth="*" x:Name="TransformedDataGridView" HorizontalAlignment="Left" Margin="466,183,0,0" VerticalAlignment="Top" Height="200" Width="400" FontSize="20"/>
 
         <Label Content="Минимальный промежуток (целая часть):" HorizontalAlignment="Left" Margin="13,620,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TextBox x:Name="MinRange" HorizontalAlignment="Left" Margin="13,650,0,0" VerticalAlignment="Top" Width="120" FontSize="16"/>
