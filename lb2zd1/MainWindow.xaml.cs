@@ -80,12 +80,28 @@ namespace lb2zd1
                         output.AppendLine($"{i,7:F2} Значение находится вне диапазона");
                     }
                 }
+                /*      else if (i > 0 && i <= 2) // 3. Окружность радиус 2, центр (0, 0)
+                      {
+                          double ySquared = 4 - Math.Pow(i, 2);
+                          if (ySquared >= 0)
+                          {
+                              f = -Math.Sqrt(ySquared);
+                              output.AppendLine($"{i,7:F2} {f,10:F5}");
+                              amountOfElements++;
+                          }
+                          else
+                          {
+                              output.AppendLine($"{i,7:F2} Значение находится вне диапазона");
+                          }
+                      }
+                */
+
                 else if (i > 0 && i <= 2) // 3. Окружность радиус 2, центр (0, 0)
                 {
-                    double ySquared = 4 - Math.Pow(i, 2);
+                    double ySquared = 4 - Math.Pow(i, 2); // 4 = r^2, где r = 2
                     if (ySquared >= 0)
                     {
-                        f = -Math.Sqrt(ySquared);
+                        f = Math.Sqrt(ySquared); // Положительная часть окружности
                         output.AppendLine($"{i,7:F2} {f,10:F5}");
                         amountOfElements++;
                     }
@@ -94,6 +110,9 @@ namespace lb2zd1
                         output.AppendLine($"{i,7:F2} Значение находится вне диапазона");
                     }
                 }
+
+
+
                 else if (i > 2 && i <= 3) // 4. Прямая y = -x + 2
                 {
                     f = -i + 2;
@@ -117,24 +136,4 @@ namespace lb2zd1
         }
     }
 }
-
-
-/*     else if (i >= -6 && i <= 2)
-     {
-         double f = (0.5) * i + 1;
-         output.AppendLine($"{i,7:F2} {f,10:F5}");
-         amountOfElements += 1;
-     }
-     else if (i >= 2 && i <= 6)
-     {
-         double f = Math.Pow(i - 4, 2) + 2;
-         output.AppendLine($"{i,7:F2}  {0,10:F5}");
-         amountOfElements += 1;
-     }
-     else if (i >= 6 && i <= 8)
-     {
-         double f = Math.Pow(i - 6, 2);
-         output.AppendLine($"{i,7:F2} {f,10:F5}");
-         amountOfElements += 1;
-     }
-*/
+ 
