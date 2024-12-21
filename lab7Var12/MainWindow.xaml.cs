@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace lab7Var12
 {
@@ -35,27 +36,41 @@ namespace lab7Var12
                 string fullName = FullNameTextBox.Text;
                 string phoneNumber = PhoneNumberTextBox.Text;
                 string[] birthDateParts = BirthDateTextBox.Text.Split('/');
-                if (phoneNumber.Length ==0) {
-                    MessageBox.Show("Пожадуйста введите телефон", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
 
-                if (fullName.Length == 0)
-
+                // Проверка на пустой телефон
+                if (phoneNumber.Length == 0)
                 {
-                    MessageBox.Show("Пожадуйста введите имя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Пожалуйста, введите телефон", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+
+                // Проверка на пустое имя
+                if (fullName.Length == 0)
+                {
+                    MessageBox.Show("Пожалуйста, введите имя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Проверка формата даты
                 if (birthDateParts.Length != 3)
                 {
                     MessageBox.Show("Неверный формат даты! Используйте DD/MM/YYYY.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
+                // Преобразование строки даты в числа
                 int day = int.Parse(birthDateParts[0]);
                 int month = int.Parse(birthDateParts[1]);
                 int year = int.Parse(birthDateParts[2]);
 
+                // Проверка на существование записи с таким же ФИО
+                if (notes.Any(note => note.FullName.Equals(fullName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    MessageBox.Show("Запись с таким ФИО уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Добавление новой записи
                 notes.Add(new NOTE
                 {
                     FullName = fullName,
@@ -63,8 +78,10 @@ namespace lab7Var12
                     BirthDate = new int[] { day, month, year }
                 });
 
+               
                 UpdateNoteList();
 
+               
                 FullNameTextBox.Clear();
                 PhoneNumberTextBox.Clear();
                 BirthDateTextBox.Clear();
@@ -75,7 +92,8 @@ namespace lab7Var12
             }
         }
 
-      
+
+
         private void UpdateNoteList()
         {
             NotesListBox.Items.Clear();
