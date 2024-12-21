@@ -1,0 +1,46 @@
+﻿<Window x:Class="lab7Var12.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab7Var12"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <!-- Ввод данных -->
+            <GroupBox Header="Добавить запись" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="200" Width="259">
+                <StackPanel>
+                    <TextBlock Text="Фио"/>
+                    <TextBox x:Name="FullNameTextBox"   Margin="5"/>
+                    <TextBlock Text="Тел"/>
+                    <TextBox x:Name="PhoneNumberTextBox"   Margin="5"/>
+                    <TextBlock Text="Дата рождения"/>
+                    <TextBox x:Name="BirthDateTextBox" Margin="5"/>
+                    <Button Content="Добавить" Click="AddNote_Click" Margin="5"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Список записей -->
+            <GroupBox Header="Список записей" Margin="10,210,531,0" VerticalAlignment="Top" Height="66">
+                <ListBox x:Name="NotesListBox"/>
+            </GroupBox>
+
+            <!-- Поиск -->
+            <GroupBox Header="Поиск по номеру телефона" Margin="10,292,531,0" VerticalAlignment="Top" Height="71">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="SearchPhoneNumberTextBox"   Width="190" Margin="5"/>
+                    <Button Content="Искать" Click="SearchNote_Click" Margin="5"/>
+                </StackPanel>
+
+
+
+
+            </GroupBox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
+                    <Button Content="Сохранить" Click="Save_Click" Width="100" Margin="5"/>
+                    <Button Content="Загрузить" Click="ReadFromFile_Click" Width="100" Margin="5"/>
+                </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
