@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace lab7Var12
 {
@@ -29,7 +30,7 @@ namespace lab7Var12
             UpdateNoteList();
         }
 
-        
+
         private void AddNote_Click(object sender, RoutedEventArgs e)
         {
             if (currentIndex >= 10)
@@ -63,7 +64,7 @@ namespace lab7Var12
 
                 currentIndex++;
 
-                SortNotesByBirthDate();
+             //   SortNotesByBirthDate();
                 UpdateNoteList();
 
                 FullNameTextBox.Clear();
@@ -76,25 +77,9 @@ namespace lab7Var12
             }
         }
 
-        
-        private void SearchNote_Click(object sender, RoutedEventArgs e)
-        {
-            string phoneNumber = SearchPhoneNumberTextBox.Text;
+ 
 
-            foreach (var note in notes)
-            {
-                if (note.PhoneNumber == phoneNumber)
-                {
-                    MessageBox.Show($"Найдено: {note.FullName}, дата рождения: {note.BirthDate[0]:D2}/{note.BirthDate[1]:D2}/{note.BirthDate[2]}",
-                        "Результат поиска", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-            }
 
-            MessageBox.Show("Человек с таким номером телефона не найден.", "Результат поиска", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-      
         private void SortNotesByBirthDate()
         {
             for (int i = 0; i < currentIndex - 1; i++)
@@ -123,8 +108,7 @@ namespace lab7Var12
                 return date1[1].CompareTo(date2[1]);
             return date1[0].CompareTo(date2[0]);
         }
-
-        // Обновление списка записей
+ 
         private void UpdateNoteList()
         {
             NotesListBox.Items.Clear();
@@ -133,6 +117,121 @@ namespace lab7Var12
                 NotesListBox.Items.Add(notes[i].ToString());
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        private void SearchNote_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text;
+            string searchCriteria = ((ComboBoxItem)SearchCriteriaComboBox.SelectedItem)?.Content.ToString();
+            bool found = false;
+
+            for (int i = 0; i < currentIndex; i++)
+            {
+                if ((searchCriteria == "По телефону" && notes[i].PhoneNumber == searchText) ||
+                    (searchCriteria == "По ФИО" && notes[i].FullName == searchText))
+                {
+                    NotesCommandListBox.Items.Add($"Найдено: {notes[i].FullName}, телефон: {notes[i].PhoneNumber}, дата рождения: {notes[i].BirthDate[0]:D2}/{notes[i].BirthDate[1]:D2}/{notes[i].BirthDate[2]}");
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                MessageBox.Show("Запись не найдена.", "Результат поиска", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        // Сортировка записей
+        private void SortNotes_Click(object sender, RoutedEventArgs e)
+        {
+            string sortCriteria = ((ComboBoxItem)SortComboBox.SelectedItem)?.Content.ToString();
+
+            for (int i = 0; i < currentIndex - 1; i++)
+            {
+                for (int j = i + 1; j < currentIndex; j++)
+                {
+                    bool swap = false;
+
+                    switch (sortCriteria)
+                    {
+                        case "По имени":
+                            if (string.Compare(notes[i].FullName, notes[j].FullName) > 0)
+                            {
+                                swap = true;
+                            }
+                            break;
+                        case "По дате":
+                            DateTime date1 = new DateTime(notes[i].BirthDate[2], notes[i].BirthDate[1], notes[i].BirthDate[0]);
+                            DateTime date2 = new DateTime(notes[j].BirthDate[2], notes[j].BirthDate[1], notes[j].BirthDate[0]);
+                            if (date1 > date2)
+                            {
+                                swap = true;
+                            }
+                            break;
+                        case "По телефону":
+                            if (string.Compare(notes[i].PhoneNumber, notes[j].PhoneNumber) > 0)
+                            {
+                                swap = true;
+                            }
+                            break;
+                    }
+
+                    if (swap)
+                    {
+                        NOTE temp = notes[i];
+                        notes[i] = notes[j];
+                        notes[j] = temp;
+                    }
+                }
+            }
+
+            UpdateNoteList();
+        }
+
+        // Удаление записи по ФИО
+        private void DeleteNote_Click(object sender, RoutedEventArgs e)
+        {
+            string fullNameToDelete = DeleteNameTextBox.Text;
+            bool deleted = false;
+
+            for (int i = 0; i < currentIndex; i++)
+            {
+                if (notes[i].FullName == fullNameToDelete)
+                {
+                    // Сдвигаем все элементы влево
+                    for (int j = i; j < currentIndex - 1; j++)
+                    {
+                        notes[j] = notes[j + 1];
+                    }
+
+                    currentIndex--;
+                    deleted = true;
+                    break;
+                }
+            }
+
+            if (deleted)
+            {
+                UpdateNoteList();
+                NotesCommandListBox.Items.Add($"Запись с ФИО '{fullNameToDelete}' удалена.");
+            }
+            else
+            {
+                MessageBox.Show("Запись с таким ФИО не найдена.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
 
 
 
@@ -205,7 +304,7 @@ namespace lab7Var12
                     }
                 }
 
-                SortNotesByBirthDate();
+           //     SortNotesByBirthDate();
                 UpdateNoteList();
                 MessageBox.Show("Данные успешно загружены из файла.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -218,4 +317,3 @@ namespace lab7Var12
 
     }
 }
- 
