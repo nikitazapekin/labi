@@ -9,63 +9,70 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
             <!-- Ввод данных -->
-            <GroupBox Header="Добавить запись" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="200" Width="259">
+            <GroupBox Header="Добавить запись" Margin="26,10,0,0"  FontSize="22" VerticalAlignment="Top" HorizontalAlignment="Left" Height="306" Width="390">
                 <StackPanel>
-                    <TextBlock Text="Фио"/>
-                    <TextBox x:Name="FullNameTextBox" Margin="5"/>
-                    <TextBlock Text="Тел"/>
-                    <TextBox x:Name="PhoneNumberTextBox" Margin="5"/>
-                    <TextBlock Text="Дата рождения"/>
-                    <TextBox x:Name="BirthDateTextBox" Margin="5"/>
-                    <Button Content="Добавить" Click="AddNote_Click" Margin="5"/>
+                    <TextBlock Text="Фио" FontSize="22"/>
+                    <TextBox x:Name="FullNameTextBox" Margin="5" FontSize="22"/>
+                    <TextBlock Text="Тел" FontSize="22"/>
+                    <TextBox x:Name="PhoneNumberTextBox" Margin="5" FontSize="22"/>
+                    <TextBlock Text="Дата рождения" FontSize="22"/>
+                    <TextBox x:Name="BirthDateTextBox" Margin="5" FontSize="22"/>
+                    <Button Content="Добавить" Click="AddNote_Click" Margin="5" FontSize="22"/>
                 </StackPanel>
             </GroupBox>
 
             <!-- Список записей -->
-            <GroupBox Header="Список записей" Margin="10,210,531,0" VerticalAlignment="Top" Height="66">
-                <ListBox x:Name="NotesListBox"/>
+            <GroupBox Header="Список записей" Margin="34,321,1343,0" VerticalAlignment="Top" Height="267"  FontSize="22">
+                <ListBox x:Name="NotesListBox" FontSize="22"/>
             </GroupBox>
 
-
             <!-- Секция команд -->
-            <GroupBox Header="Выполнение команды:" Margin="10,286,1531,0" VerticalAlignment="Top" Height="69">
-                <ListBox x:Name="NotesCommandListBox"/>
+            <GroupBox Header="Выполнение команды:" Margin="455,321,891,0"  FontSize="22" VerticalAlignment="Top" Height="267">
+                <ListBox x:Name="NotesCommandListBox" FontSize="22"/>
             </GroupBox>
 
             <!-- Поиск -->
-            <GroupBox Header="Поиск" Margin="10,360,1367,0" VerticalAlignment="Top" Height="133">
+            <GroupBox  FontSize="22" Header="Поиск" Margin="34,630,1343,0" VerticalAlignment="Top" Height="133">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <ComboBox x:Name="SearchCriteriaComboBox" Width="120" Margin="5">
-                            <ComboBoxItem>По телефону</ComboBoxItem>
-                            <ComboBoxItem>По ФИО</ComboBoxItem>
+                        <ComboBox x:Name="SearchCriteriaComboBox" Width="120" Margin="5" FontSize="22">
+                            <ComboBoxItem FontSize="22">По телефону</ComboBoxItem>
+                            <ComboBoxItem FontSize="22">По ФИО</ComboBoxItem>
                         </ComboBox>
-                        <TextBox x:Name="SearchTextBox" Width="120" Margin="5"/>
-                        <Button Content="Искать" Click="SearchNote_Click"  Width="80" Margin="5"/>
+                        <TextBox x:Name="SearchTextBox" Width="120" Margin="5" FontSize="22"/>
+                        <Button Content="Искать" Click="SearchNote_Click" Width="80" Margin="5" FontSize="22"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <ComboBox x:Name="SortComboBox" Width="120" Margin="5">
-                            <ComboBoxItem>По имени</ComboBoxItem>
-                            <ComboBoxItem>По дате</ComboBoxItem>
-                            <ComboBoxItem>По телефону</ComboBoxItem>
+                        <ComboBox x:Name="SortComboBox" Width="120" Margin="5" FontSize="22">
+                            <ComboBoxItem FontSize="22">По имени</ComboBoxItem>
+                            <ComboBoxItem FontSize="22">По дате</ComboBoxItem>
+                            <ComboBoxItem FontSize="22">По телефону</ComboBoxItem>
                         </ComboBox>
-                        <Button Content="Сортировать"  Click="SortNotes_Click"   Width="120" Margin="5"/>
+                        <Button Content="Сортировать" Click="SortNotes_Click" Width="173" Margin="5" FontSize="22"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
 
             <!-- Удаление записи -->
-            <GroupBox Header="Удалить запись" Margin="10,493,1531,0" VerticalAlignment="Top" Height="100">
+            <GroupBox   FontSize="22" Header="Удалить запись" Margin="22,773,1345,0" VerticalAlignment="Top" Height="172" RenderTransformOrigin="0.5,0.5">
+                <GroupBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-0.235"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-0.496"/>
+                    </TransformGroup>
+                </GroupBox.RenderTransform>
                 <StackPanel>
-                    <TextBlock Text="Введите ФИО для удаления"/>
-                    <TextBox x:Name="DeleteNameTextBox" Margin="5"/>
-                    <Button Content="Удалить"  Click="DeleteNote_Click"  Margin="5"/>
+                    <TextBlock Text="Введите ФИО для удаления" FontSize="22"/>
+                    <TextBox x:Name="DeleteNameTextBox" Margin="5" FontSize="22"/>
+                    <Button Content="Удалить" Click="DeleteNote_Click" Margin="5" FontSize="22"/>
                 </StackPanel>
             </GroupBox>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,600,0,683" Width="259">
-                <Button Content="Сохранить" Click="Save_Click" Width="100" Margin="5"/>
-                <Button Content="Загрузить" Click="ReadFromFile_Click" Width="100" Margin="5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,952,0,264" Width="350">
+                <Button Content="Сохранить" Click="Save_Click" Width="138" Margin="5" FontSize="22"/>
+                <Button Content="Загрузить" Click="ReadFromFile_Click" Width="140" Margin="5" FontSize="22"/>
             </StackPanel>
         </Grid>
     </ScrollViewer>
