@@ -8,7 +8,7 @@ namespace lab7Var12
 {
     public partial class MainWindow : Window
     {
-        // Описание структуры NOTE
+       
         public struct NOTE
         {
             public string FullName { get; set; }
@@ -102,7 +102,7 @@ namespace lab7Var12
 
 
 
-
+        /*
         private void SearchNote_Click(object sender, RoutedEventArgs e)
         {
 
@@ -139,25 +139,99 @@ namespace lab7Var12
                 MessageBox.Show("Запись не найдена.", "Результат поиска", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+ 
+
+        private void SortNotes_Click(object sender, RoutedEventArgs e)
+        {
+            string sortCriteria = ((ComboBoxItem)SortComboBox.SelectedItem)?.Content.ToString();
+
+            for (int i = 0; i < currentIndex - 1; i++)
+            {
+                for (int j = i + 1; j < currentIndex; j++)
+                {
+                    bool swap = false;
+
+                    switch (sortCriteria)
+                    {
+                        case "По имени":
+                            if (string.Compare(notes[i].FullName, notes[j].FullName) > 0)
+                            {
+                                swap = true;
+                            }
+                            break;
+                        case "По дате":
+                            DateTime date1 = new DateTime(notes[i].BirthDate[2], notes[i].BirthDate[1], notes[i].BirthDate[0]);
+                            DateTime date2 = new DateTime(notes[j].BirthDate[2], notes[j].BirthDate[1], notes[j].BirthDate[0]);
+                            if (date1 > date2)
+                            {
+                                swap = true;
+                            }
+                            break;
+                        case "По телефону":
+                            if (string.Compare(notes[i].PhoneNumber, notes[j].PhoneNumber) > 0)
+                            {
+                                swap = true;
+                            }
+                            break;
+                    }
+
+                    if (swap)
+                    {
+                        NOTE temp = notes[i];
+                        notes[i] = notes[j];
+                        notes[j] = temp;
+                    }
+                }
+            }
+
+            UpdateNoteList();
+        }
+        */
 
 
-
-        /*
 
         private void SearchNote_Click(object sender, RoutedEventArgs e)
         {
-            string searchText = SearchTextBox.Text;
+            NotesCommandListBox.Items.Clear();
+            string searchText = SearchTextBox.Text.Trim();
             string searchCriteria = ((ComboBoxItem)SearchCriteriaComboBox.SelectedItem)?.Content.ToString();
             bool found = false;
 
+            if (string.IsNullOrEmpty(searchCriteria))
+            {
+                MessageBox.Show("Выберите критерий поиска.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             for (int i = 0; i < currentIndex; i++)
             {
-                if ((searchCriteria == "По телефону" && notes[i].PhoneNumber == searchText) ||
-                    (searchCriteria == "По ФИО" && notes[i].FullName == searchText))
+                try
                 {
-                    NotesCommandListBox.Items.Add($"Найдено: {notes[i].FullName}, телефон: {notes[i].PhoneNumber}, дата рождения: {notes[i].BirthDate[0]:D2}/{notes[i].BirthDate[1]:D2}/{notes[i].BirthDate[2]}");
-                    found = true;
-                    break;
+                    if (searchCriteria == "По дате")
+                    {
+                        if (!DateTime.TryParseExact(searchText, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime searchDate))
+                        {
+                            MessageBox.Show("Введите дату в формате DD/MM/YYYY.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
+                        }
+
+                        DateTime noteDate = new DateTime(notes[i].BirthDate[2], notes[i].BirthDate[1], notes[i].BirthDate[0]);
+                        if (searchDate == noteDate)
+                        {
+                            NotesCommandListBox.Items.Add(notes[i].ToString());
+                            found = true;
+                        }
+                    }
+                    else if ((searchCriteria == "По телефону" && notes[i].PhoneNumber.Equals(searchText, StringComparison.OrdinalIgnoreCase)) ||
+                             (searchCriteria == "По ФИО" && notes[i].FullName.Equals(searchText, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        NotesCommandListBox.Items.Add(notes[i].ToString());
+                        found = true;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка при обработке поиска.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
@@ -166,13 +240,16 @@ namespace lab7Var12
                 MessageBox.Show("Запись не найдена.", "Результат поиска", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-        */
-        // Сортировка записей
 
-        /*
         private void SortNotes_Click(object sender, RoutedEventArgs e)
         {
             string sortCriteria = ((ComboBoxItem)SortComboBox.SelectedItem)?.Content.ToString();
+
+            if (string.IsNullOrEmpty(sortCriteria))
+            {
+                MessageBox.Show("Выберите критерий сортировки.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
             for (int i = 0; i < currentIndex - 1; i++)
             {
@@ -180,28 +257,26 @@ namespace lab7Var12
                 {
                     bool swap = false;
 
-                    switch (sortCriteria)
+                    try
                     {
-                        case "По имени":
-                            if (string.Compare(notes[i].FullName, notes[j].FullName) > 0)
-                            {
-                                swap = true;
-                            }
-                            break;
-                        case "По дате":
-                            DateTime date1 = new DateTime(notes[i].BirthDate[2], notes[i].BirthDate[1], notes[i].BirthDate[0]);
-                            DateTime date2 = new DateTime(notes[j].BirthDate[2], notes[j].BirthDate[1], notes[j].BirthDate[0]);
-                            if (date1 > date2)
-                            {
-                                swap = true;
-                            }
-                            break;
-                        case "По телефону":
-                            if (string.Compare(notes[i].PhoneNumber, notes[j].PhoneNumber) > 0)
-                            {
-                                swap = true;
-                            }
-                            break;
+                        switch (sortCriteria)
+                        {
+                            case "По имени":
+                                swap = string.Compare(notes[i].FullName, notes[j].FullName, StringComparison.OrdinalIgnoreCase) > 0;
+                                break;
+                            case "По дате":
+                                DateTime date1 = new DateTime(notes[i].BirthDate[2], notes[i].BirthDate[1], notes[i].BirthDate[0]);
+                                DateTime date2 = new DateTime(notes[j].BirthDate[2], notes[j].BirthDate[1], notes[j].BirthDate[0]);
+                                swap = date1 > date2;
+                                break;
+                            case "По телефону":
+                                swap = string.Compare(notes[i].PhoneNumber, notes[j].PhoneNumber, StringComparison.OrdinalIgnoreCase) > 0;
+                                break;
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ошибка при сортировке записей.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
                     if (swap)
@@ -215,55 +290,6 @@ namespace lab7Var12
 
             UpdateNoteList();
         }
-    */
-
-
-        private void SortNotes_Click(object sender, RoutedEventArgs e)
-        {
-            string sortCriteria = ((ComboBoxItem)SortComboBox.SelectedItem)?.Content.ToString();
-
-            for (int i = 0; i < currentIndex - 1; i++)
-            {
-                for (int j = i + 1; j < currentIndex; j++)
-                {
-                    bool swap = false;
-
-                    switch (sortCriteria)
-                    {
-                        case "По имени":
-                            if (string.Compare(notes[i].FullName, notes[j].FullName) > 0)
-                            {
-                                swap = true;
-                            }
-                            break;
-                        case "По дате":
-                            DateTime date1 = new DateTime(notes[i].BirthDate[2], notes[i].BirthDate[1], notes[i].BirthDate[0]);
-                            DateTime date2 = new DateTime(notes[j].BirthDate[2], notes[j].BirthDate[1], notes[j].BirthDate[0]);
-                            if (date1 > date2)
-                            {
-                                swap = true;
-                            }
-                            break;
-                        case "По телефону":
-                            if (string.Compare(notes[i].PhoneNumber, notes[j].PhoneNumber) > 0)
-                            {
-                                swap = true;
-                            }
-                            break;
-                    }
-
-                    if (swap)
-                    {
-                        NOTE temp = notes[i];
-                        notes[i] = notes[j];
-                        notes[j] = temp;
-                    }
-                }
-            }
-
-            UpdateNoteList();
-        }
-
 
 
         // Удаление записи по ФИО
@@ -387,7 +413,7 @@ namespace lab7Var12
 
         private void AddDefaultNotes_Click(object sender, RoutedEventArgs e)
         {
-            // Добавление 6 записей по умолчанию
+         
             string[] defaultNames = { "Иван Иванов", "Петр Петров", "Александр Сидоров", "Мария Кузнецова", "Анна Смирнова", "Елена Волкова" };
             string[] defaultPhones = { "111-111-1111", "222-222-2222", "333-333-3333", "444-444-4444", "555-555-5555", "666-666-6666" };
             string[] defaultDates = { "1990/01/01", "1985/05/10", "2000/12/25", "1980/03/15", "1995/07/22", "1992/09/11" };

@@ -8,7 +8,7 @@
         Title="MainWindow" Height="1250" Width="1800">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
-            <!-- Ввод данных -->
+          
             <GroupBox Header="Добавить запись" Margin="26,10,0,0"  FontSize="22" VerticalAlignment="Top" HorizontalAlignment="Left" Height="306" Width="390">
                 <StackPanel>
                     <TextBlock Text="Фио" FontSize="22"/>
@@ -20,18 +20,15 @@
                     <Button Content="Добавить" Click="AddNote_Click" Margin="5" FontSize="22"/>
                 </StackPanel>
             </GroupBox>
-
-            <!-- Список записей -->
+ 
             <GroupBox Header="Список записей" Margin="455,29,810,0" VerticalAlignment="Top" Height="267"  FontSize="22">
                 <ListBox x:Name="NotesListBox" FontSize="22"/>
             </GroupBox>
-
-            <!-- Секция команд -->
+ 
             <GroupBox Header="Выполнение команды:" Margin="1011,29,254,0"  FontSize="22" VerticalAlignment="Top" Height="267">
                 <ListBox x:Name="NotesCommandListBox" FontSize="22"/>
             </GroupBox>
-
-            <!-- Поиск -->
+ 
             <GroupBox  FontSize="22" Header="Поиск" Margin="26,354,1351,0" VerticalAlignment="Top" Height="133">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -53,8 +50,7 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-
-            <!-- Удаление записи -->
+ 
             <GroupBox   FontSize="22" Header="Удалить запись" Margin="32,507,1335,0" VerticalAlignment="Top" Height="172" RenderTransformOrigin="0.5,0.5">
                 <GroupBox.RenderTransform>
                     <TransformGroup>
