@@ -78,28 +78,7 @@ namespace lab7Var12
         }
 
  
-
-
-        private void SortNotesByBirthDate()
-        {
-            for (int i = 0; i < currentIndex - 1; i++)
-            {
-                for (int j = i + 1; j < currentIndex; j++)
-                {
-                    var date1 = notes[i].BirthDate;
-                    var date2 = notes[j].BirthDate;
-
-                    if (CompareDates(date1, date2) > 0)
-                    {
-                        var temp = notes[i];
-                        notes[i] = notes[j];
-                        notes[j] = temp;
-                    }
-                }
-            }
-        }
-
-        // Сравнение двух дат
+         
         private int CompareDates(int[] date1, int[] date2)
         {
             if (date1[2] != date2[2])
@@ -124,10 +103,46 @@ namespace lab7Var12
 
 
 
+        private void SearchNote_Click(object sender, RoutedEventArgs e)
+        {
+
+            NotesCommandListBox.Items.Clear();
+            string searchText = SearchTextBox.Text;
+            string searchCriteria = ((ComboBoxItem)SearchCriteriaComboBox.SelectedItem)?.Content.ToString();
+            bool found = false;
+
+            for (int i = 0; i < currentIndex; i++)
+            {
+                if (searchCriteria == "По дате")
+                {
+                    DateTime searchDate = DateTime.ParseExact(searchText, "yyyy/MM/dd", null);
+                    DateTime noteDate = new DateTime(notes[i].BirthDate[2], notes[i].BirthDate[1], notes[i].BirthDate[0]);
+
+                    if (searchDate == noteDate)
+                    {
+                        NotesCommandListBox.Items.Add($"Найдено: {notes[i].FullName}, телефон: {notes[i].PhoneNumber}, дата рождения: {notes[i].BirthDate[0]:D2}/{notes[i].BirthDate[1]:D2}/{notes[i].BirthDate[2]}");
+                        found = true;
+                        break;
+                    }
+                }
+                else if ((searchCriteria == "По телефону" && notes[i].PhoneNumber == searchText) ||
+                         (searchCriteria == "По ФИО" && notes[i].FullName == searchText))
+                {
+                    NotesCommandListBox.Items.Add($"Найдено: {notes[i].FullName}, телефон: {notes[i].PhoneNumber}, дата рождения: {notes[i].BirthDate[0]:D2}/{notes[i].BirthDate[1]:D2}/{notes[i].BirthDate[2]}");
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                MessageBox.Show("Запись не найдена.", "Результат поиска", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
 
 
 
-
+        /*
 
         private void SearchNote_Click(object sender, RoutedEventArgs e)
         {
@@ -151,8 +166,58 @@ namespace lab7Var12
                 MessageBox.Show("Запись не найдена.", "Результат поиска", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
+        */
         // Сортировка записей
+
+        /*
+        private void SortNotes_Click(object sender, RoutedEventArgs e)
+        {
+            string sortCriteria = ((ComboBoxItem)SortComboBox.SelectedItem)?.Content.ToString();
+
+            for (int i = 0; i < currentIndex - 1; i++)
+            {
+                for (int j = i + 1; j < currentIndex; j++)
+                {
+                    bool swap = false;
+
+                    switch (sortCriteria)
+                    {
+                        case "По имени":
+                            if (string.Compare(notes[i].FullName, notes[j].FullName) > 0)
+                            {
+                                swap = true;
+                            }
+                            break;
+                        case "По дате":
+                            DateTime date1 = new DateTime(notes[i].BirthDate[2], notes[i].BirthDate[1], notes[i].BirthDate[0]);
+                            DateTime date2 = new DateTime(notes[j].BirthDate[2], notes[j].BirthDate[1], notes[j].BirthDate[0]);
+                            if (date1 > date2)
+                            {
+                                swap = true;
+                            }
+                            break;
+                        case "По телефону":
+                            if (string.Compare(notes[i].PhoneNumber, notes[j].PhoneNumber) > 0)
+                            {
+                                swap = true;
+                            }
+                            break;
+                    }
+
+                    if (swap)
+                    {
+                        NOTE temp = notes[i];
+                        notes[i] = notes[j];
+                        notes[j] = temp;
+                    }
+                }
+            }
+
+            UpdateNoteList();
+        }
+    */
+
+
         private void SortNotes_Click(object sender, RoutedEventArgs e)
         {
             string sortCriteria = ((ComboBoxItem)SortComboBox.SelectedItem)?.Content.ToString();
@@ -199,9 +264,12 @@ namespace lab7Var12
             UpdateNoteList();
         }
 
+
+
         // Удаление записи по ФИО
         private void DeleteNote_Click(object sender, RoutedEventArgs e)
         {
+            NotesCommandListBox.Items.Clear();
             string fullNameToDelete = DeleteNameTextBox.Text;
             bool deleted = false;
 
@@ -209,7 +277,7 @@ namespace lab7Var12
             {
                 if (notes[i].FullName == fullNameToDelete)
                 {
-                    // Сдвигаем все элементы влево
+                  
                     for (int j = i; j < currentIndex - 1; j++)
                     {
                         notes[j] = notes[j + 1];
@@ -313,6 +381,33 @@ namespace lab7Var12
                 MessageBox.Show($"Ошибка при чтении файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
+
+
+        private void AddDefaultNotes_Click(object sender, RoutedEventArgs e)
+        {
+            // Добавление 6 записей по умолчанию
+            string[] defaultNames = { "Иван Иванов", "Петр Петров", "Александр Сидоров", "Мария Кузнецова", "Анна Смирнова", "Елена Волкова" };
+            string[] defaultPhones = { "111-111-1111", "222-222-2222", "333-333-3333", "444-444-4444", "555-555-5555", "666-666-6666" };
+            string[] defaultDates = { "1990/01/01", "1985/05/10", "2000/12/25", "1980/03/15", "1995/07/22", "1992/09/11" };
+
+            for (int i = 0; i < 6; i++)
+            {
+                string[] dateParts = defaultDates[i].Split('/');
+                notes[currentIndex] = new NOTE
+                {
+                    FullName = defaultNames[i],
+                    PhoneNumber = defaultPhones[i],
+                    BirthDate = new int[] { int.Parse(dateParts[2]), int.Parse(dateParts[1]), int.Parse(dateParts[0]) }
+                };
+                currentIndex++;
+            }
+
+            UpdateNoteList();
+        }
+
+
 
 
     }
