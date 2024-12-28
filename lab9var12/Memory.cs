@@ -50,12 +50,4 @@ public class Memory : Element
     }
 
 }
-/*
-namespace lab9var12
-{
-    internal class Memory
-    {
-    }
-}
-   private int[] inputValues;
- */
+ 

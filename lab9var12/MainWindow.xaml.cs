@@ -123,11 +123,12 @@ namespace lab9var12
             {
                 var inputs = TriggerInputs.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                if (inputs.Length != 3)
+           /*     if (inputs.Length != 3)
                 {
                     MessageBox.Show("Введите ровно 3 числа (0 или 1).");
                     return;
                 }
+           */
 
                 int[] parsedInputs = new int[inputs.Length];
 
@@ -150,6 +151,14 @@ namespace lab9var12
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+
+
+        private void SetOutput_Click(object sender, RoutedEventArgs e)
+        {
+          TriggerOutput.Text = $"Выход: {memory.ComputeOutput()}";
         }
 
 
