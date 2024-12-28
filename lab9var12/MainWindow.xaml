@@ -9,7 +9,7 @@
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
             <TextBlock Text="Введите значения входов (0 или 1):" Margin="0,0,0,10" />
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,30,0,0">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,0,0,30">
                 <TextBlock Text="Элемент1"  HorizontalAlignment="Center"  FontSize="22"  />
                 <TextBox Name="Input1" Width="200" Margin="0,5" FontSize="22"  />
                 <TextBlock Text="Элемент2"  HorizontalAlignment="Center"  FontSize="22"   />
@@ -18,10 +18,11 @@
                 <TextBox Name="Input3" Width="200" Margin="0,5"   FontSize="22"  />
                 <TextBlock Text="Элемент4"  HorizontalAlignment="Center"  FontSize="22" />
                 <TextBox Name="Input4" Width="200" Margin="0,5"   FontSize="22"  />
+                
+                <TextBlock Name="OutputText"  HorizontalAlignment="Center"   FontSize="22" Text="Результат" />
+                <Button Content="Вычислить"  FontSize="22" Click="ComputeOutput_Click" Height="51" Width="296"/>
             </StackPanel>
 
-            <TextBlock Name="OutputText" Margin="0,326,0,-126"   FontSize="16" Text="Результат" />
-            <Button Content="Вычислить"  FontSize="22" Click="ComputeOutput_Click" HorizontalAlignment="Left" Margin="36,419,0,0" VerticalAlignment="Top" Height="51" Width="297"/>
             <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,530,0,0">
                 <TextBlock Text="Входы для триггера"  HorizontalAlignment="Center"  FontSize="22"  />
                 <TextBox Name="TriggerInputs" Width="200" Margin="0,5" FontSize="22"  />
@@ -31,7 +32,7 @@
                 <Button Content="Выход"  FontSize="22" Click="SetOutput_Click"  Margin="0,19,0,0"  Height="51" Width="296"/>
 
                 <TextBlock  Name="TriggerInputsArray"  FontSize="22" Text=" Регистры: [0,0,0] [0,0,0] [0,0,0] [0,0,0]"  HorizontalAlignment="Center"   Margin="0,19,0,19"  />
-           
+
 
 
                 <TextBlock FontSize="22" Text="Номер триггера:"  HorizontalAlignment="Center"   Margin="0,19,0,19"  />

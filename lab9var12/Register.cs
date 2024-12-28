@@ -56,24 +56,9 @@ public class Register : Element, IShiftable
 
     public override void Invert()
     {
-        base.Invert();
+      
     }
-    /*
-     public void SetInputs(int[][] inputValues)
-     {
-         if (inputValues.Length != memories.Length)
-             throw new ArgumentException($"Ошибка.");
-
-         for (int i = 0; i < memories.Length; i++)
-         {
-             if (inputValues[i].Length != 3)
-                 throw new ArgumentException($"Ошибка.");
-
-             inputs[i] = inputValues[i];
-          MessageBox.Show($"Регистр {i+1} после обновления: [{inputs[i][0]}, {inputs[i][1]}, {inputs[i][2]}]");
-         }
-     }
-    */
+ 
 
     public void SetInputs(int[][] inputValues)
     {
@@ -88,7 +73,7 @@ public class Register : Element, IShiftable
             inputs[i] = inputValues[i];
         }
 
-        // Отладочная информация
+        
       
     }
  

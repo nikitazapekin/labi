@@ -74,12 +74,7 @@ namespace lab9var12
             {
                 var inputs = TriggerInputs.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-           /*     if (inputs.Length != 3)
-                {
-                    MessageBox.Show("Введите ровно 3 числа (0 или 1).");
-                    return;
-                }
-           */
+  
 
                 int[] parsedInputs = new int[inputs.Length];
 
@@ -119,13 +114,13 @@ namespace lab9var12
         {
             try
             {
-                int[][] parsedInputs = new int[4][];  // Исправлено: был дублирующий индекс
+                int[][] parsedInputs = new int[4][];  
                 parsedInputs[0] = new int[] { 1, 1, 1 };
                 parsedInputs[1] = new int[] { 1, 1, 0 };
                 parsedInputs[2] = new int[] { 1, 0, 1 };
-                parsedInputs[3] = new int[] { 0, 0, 1 }; // Исправлено
+                parsedInputs[3] = new int[] { 0, 0, 1 }; 
 
-                register.SetInputs(parsedInputs);  // Применяем новые значения
+                register.SetInputs(parsedInputs);  
 
                 var states = register.GetInputs();
                 string formattedInputs = "";
@@ -134,7 +129,7 @@ namespace lab9var12
                     formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
                 }
 
-                // Обновляем текст в UI
+              
                 TriggerInputsArray.Text = "Регистры: " + formattedInputs;
             }
             catch
@@ -142,20 +137,7 @@ namespace lab9var12
                 MessageBox.Show("Ошибка.");
             }
         }
-        /*
-        private void SetTriggerIndexButton(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка.");
-            }
-
-        }
-        */
+     
 
         private void SetTriggerIndexButton(object sender, RoutedEventArgs e)
         {
