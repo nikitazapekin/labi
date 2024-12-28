@@ -31,7 +31,46 @@ namespace lab9var12
             memory = new Memory(3);
             register = new Register(4);
         }
+         
+        private void InvertComb_Click(object sender, RoutedEventArgs e)
+        {
+            combinationalElement.Invert();
 
+            int[] inputs = new int[4];
+          inputs=   combinationalElement.GetInputs();
+            Input1.Text = inputs[0].ToString();
+            Input2.Text = inputs[1].ToString();
+            Input3.Text = inputs[2].ToString();
+            Input4.Text = inputs[3].ToString();
+
+
+        }
+
+        //InvertMemory_Click
+
+        private void InvertMemory_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+
+          memory.Invert();
+
+            int[] inputs = new int[2];
+            inputs = memory.GetInputs();
+
+            string inputsString = string.Join(", ", inputs);
+
+         
+            TriggerInputs.Text = inputsString;
+            } catch
+            {
+                MessageBox.Show("Ошибка");
+            }
+
+
+
+        }
         private void ComputeOutput_Click(object sender, RoutedEventArgs e)
         {
 

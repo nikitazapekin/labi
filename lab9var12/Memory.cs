@@ -51,5 +51,22 @@ public class Memory : Element
         inputs = inputValues;
     }
 
+
+    public int[] GetInputs()
+    {
+        return inputs;
+    }
+
+
+    public override void Invert()
+    {
+       for(int i=0; i<inputs.Length; i++)
+        {
+            inputs[i] = inputs[i] == 0 ? 1 : 0;
+
+        }
+    }
+
+
 }
  
