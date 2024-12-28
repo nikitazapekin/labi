@@ -46,7 +46,7 @@ namespace lab9var12
 
         }
 
-        //InvertMemory_Click
+ 
 
         private void InvertMemory_Click(object sender, RoutedEventArgs e)
         {
@@ -246,53 +246,26 @@ namespace lab9var12
 
 
 
-        //InvertRegister
-
-        /*
+   
 
         private void InvertRegister(object sender, RoutedEventArgs e)
         {
             try
             {
-
-            int[][] parsedInputs = new int[4][];
-            combinationalElement.Invert();
-            parsedInputs = register.GetInputs();
-            string formattedInputs = "";
-            for (int i = 0; i < parsedInputs.Length; i++)
-            {
-                formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
-            }
-
-
-            TriggerInputsArray.Text = "Регистры: " + formattedInputs;
-            } catch
-            {
-                MessageBox.Show("Ошибка");
-            }
-
-        }
-        */
-
-
-        private void InvertRegister(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // Выполнить инвертирование для всех элементов Register
+             
                 register.Invert();
 
-                // Получить обновленные данные из Register
+            
                 int[][] parsedInputs = register.GetInputs();
 
-                // Форматировать строку для отображения данных
+             
                 string formattedInputs = "";
                 for (int i = 0; i < parsedInputs.Length; i++)
                 {
                     formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
                 }
 
-                // Обновить текст в TriggerInputsArray для отображения инвертированных данных
+            
                 TriggerInputsArray.Text = "Регистры: " + formattedInputs;
             }
             catch
@@ -301,8 +274,34 @@ namespace lab9var12
             }
         }
 
+        
+        private void ByteMove(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+
+            register.Shift(1);
+
+            int[][] parsedInputs = register.GetInputs();
 
 
+            string formattedInputs = "";
+            for (int i = 0; i < parsedInputs.Length; i++)
+            {
+                formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
+            }
+
+
+            TriggerInputsArray.Text = "Регистры: " + formattedInputs;
+
+            } catch
+            {
+                MessageBox.Show("Ошибка");
+            }
+            // Сдвигаем все значения вправо на 1 бит
+            //     register.Shift(-1);
+        }
 
 
     }
