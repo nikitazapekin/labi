@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,26 +19,29 @@ namespace lab9var12
     public partial class MainWindow : Window
     {
         private Combinational combinationalElement;
+        private Memory memory;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            combinationalElement = new Combinational(4); 
+            combinationalElement = new Combinational(4);
+            memory = new Memory(3);
         }
 
         private void ComputeOutput_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Обработчик вызван!");
-            OutputText.Text = "ысффсы фсыыс";
-           try
+
+
+            try
             {
-             
+
                 int[] inputs = new int[4];
                 inputs[0] = ParseInput(Input1.Text, "Вход 1");
                 inputs[1] = ParseInput(Input2.Text, "Вход 2");
                 inputs[2] = ParseInput(Input3.Text, "Вход 3");
                 inputs[3] = ParseInput(Input4.Text, "Вход 4");
- 
+
                 combinationalElement.SetInputs(inputs);
                 combinationalElement.SetInputs(inputs);
                 int result = combinationalElement.ComputeOutput();
@@ -47,7 +51,7 @@ namespace lab9var12
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        
+
         }
 
         private int ParseInput(string input, string fieldName)
@@ -60,6 +64,55 @@ namespace lab9var12
         }
 
 
+        private void SetInputs_Click(object sender, RoutedEventArgs e)
+        {
+            var inputs = TriggerInputs.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+ 
 
+            if (inputs.Length == 0  )
+            {
+                MessageBox.Show("Введите данные.");
+                return;
+            }
+            if (inputs.Length != 3)
+            {
+                MessageBox.Show("Введите 3 числа 1 или 0.");
+                return;
+            }
+
+
+                foreach (var input in inputs)
+            {
+                if (input != "1" && input != "0")
+                {
+                    MessageBox.Show("Все введенные значения должны быть либо 1, либо 0.");
+                    return;
+                }
+            }
+
+
+
+
+            int[] parsedInputs = new int[inputs.Length];
+
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                if (!int.TryParse(inputs[i], out parsedInputs[i]))
+                {
+                    MessageBox.Show("Все значения должны быть числами.");
+                    return;
+                }
+            }
+
+            memory.SetInputs(parsedInputs);
+
+
+
+
+
+
+
+
+        }
     }
 }
