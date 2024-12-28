@@ -55,7 +55,7 @@
                 <Button FontSize="22" Click="InvertRegister" Content="Инвертировать"  Margin="0,19,0,0"    Width="150" Height="40" />
                 <Button FontSize="22" Click="ByteMove" Content="Сдвиг"  Margin="0,19,0,0"    Width="150" Height="40" />
                 <Button FontSize="22" Click="SaveRegister" Content="Сохранить"  Margin="0,19,0,0"    Width="150" Height="40" />
-                <Button FontSize="22" Click="LoadRegister" Content="Сохранить"  Margin="0,19,0,0"    Width="150" Height="40" />
+                <Button FontSize="22" Click="LoadRegister" Content="Загрузить"  Margin="0,19,0,0"    Width="150" Height="40" />
             </StackPanel>
 
         </Grid>

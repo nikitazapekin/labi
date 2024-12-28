@@ -55,11 +55,11 @@ public class Combinational : Element
         int orResult = inputs[0];
         for (int i = 1; i < inputs.Length; i++)
         {
-            orResult |= inputs[i]; 
+            orResult |= inputs[i];
         }
-        return orResult == 0 ? 1 : 0;  
+        return orResult == 0 ? 1 : 0;
     }
- 
+
 
 
 
@@ -120,10 +120,34 @@ public class Combinational : Element
 
         return true;
     }
-    
 
 
 
+
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        var other = (Combinational)obj;
+
+        // Сравнение имени и количества входов
+        if (Name != other.Name || InputCount != other.InputCount)
+            return false;
+
+        // Сравнение содержимого массива inputs
+        if (inputs.Length != other.inputs.Length)
+            return false;
+
+        for (int i = 0; i < inputs.Length; i++)
+        {
+            if (inputs[i] != other.inputs[i])
+                return false;
+        }
+
+        return true;
+    }
 
 
 

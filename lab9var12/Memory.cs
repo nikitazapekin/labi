@@ -99,7 +99,6 @@ public class Memory : Element
             int length = reader.ReadInt32();  
             inputs = new int[length];   
 
-            // Читаем значения массива
             for (int i = 0; i < length; i++)
             {
                 inputs[i] = reader.ReadInt32();  

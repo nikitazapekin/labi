@@ -141,43 +141,53 @@ namespace lab9var12
 
 
 
-
         private void SetOutput_Click(object sender, RoutedEventArgs e)
         {
           TriggerOutput.Text = $"Выход: {memory.ComputeOutput()}";
         }
 
  
-
+       
 
         private void SetRandomTriggerButton(object sender, RoutedEventArgs e)
         {
             try
             {
+                Random random = new Random();
                 int[][] parsedInputs = new int[4][];  
-                parsedInputs[0] = new int[] { 1, 1, 1 };
-                parsedInputs[1] = new int[] { 1, 1, 0 };
-                parsedInputs[2] = new int[] { 1, 0, 1 };
-                parsedInputs[3] = new int[] { 0, 0, 1 }; 
 
-                register.SetInputs(parsedInputs);  
+                for (int i = 0; i < parsedInputs.Length; i++)
+                {
+               
+                    parsedInputs[i] = new int[]
+                    {
+                random.Next(0, 2), // R
+                random.Next(0, 2), // S
+                random.Next(0, 2)  // CLK
+                    };
+                }
 
-                var states = register.GetInputs();
+              
+                register.SetInputs(parsedInputs);
+
+            
                 string formattedInputs = "";
                 for (int i = 0; i < parsedInputs.Length; i++)
                 {
                     formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
                 }
 
-              
+             
                 TriggerInputsArray.Text = "Регистры: " + formattedInputs;
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Ошибка.");
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
-     
+
+
+
 
         private void SetTriggerIndexButton(object sender, RoutedEventArgs e)
         {
@@ -457,12 +467,7 @@ namespace lab9var12
                 MessageBox.Show("Данные для Register успешно загружены.");
 
 
-                /*    int[] inputs = memory.GetInputs();
-
-
-                    string inputsString = string.Join(", ", inputs);
-
-                    TriggerInputs.Text = inputsString; */
+               
 
 
                 int[][] parsedInputs = register.GetInputs();
