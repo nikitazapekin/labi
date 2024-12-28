@@ -306,7 +306,7 @@ namespace lab9var12
 
         {
          int[] inputs = new int[4];
-         //   inputs =
+    
 
                    try
             {
@@ -368,58 +368,153 @@ namespace lab9var12
 
 
         }
-    }
-
-}
 
 
-
-/*
-    private void SaveButton_Click_1(object sender, RoutedEventArgs e)
+    
+        private void SaveMemory_Click(object sender, RoutedEventArgs e)
         {
-            if (currentElement == null)
+            try
             {
-                MessageBox.Show("Нет выбранного элемента для сохранения.");
+                string fileName = "memory_save.bin";  
+                memory.SaveToBinary(fileName); 
+                MessageBox.Show($"Элемент триггера сохранен в файл: {fileName}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
+        }
+
+
+        /*
+        private void LoadMemory_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+
+            string fileName = "memory_save.bin";
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+
+
+
+
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Файл сохранения не найден.");
                 return;
             }
 
             try
             {
-                string fileName = $"{currentElement.GetType().Name}_save";
+                string binaryData = File.ReadAllText(filePath);
 
-                if (currentElement is Combinational combinational)
-                {
-                    using (var writer = new StreamWriter(fileName))
-                    {
-                        writer.WriteLine(combinationalElement.ToBinaryString());
-                    }
-                    MessageBox.Show($"Комбинированный элемент сохранен в файл: {fileName}");
-                }
-                else if (currentElement is Register register)
-                {
-                    register.SaveToBinary(fileName);
-                    MessageBox.Show($"Регистр сохранен в файл: {fileName}");
-                }
-                else if (currentElement is Memory memory)
-                {
-                    try
-                    {
-                        memory.SaveToBinary(fileName);
-                        MessageBox.Show("Данные успешно сохранены в бинарный файл.");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Ошибка при сохранении: {ex.Message}");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Только Memory поддерживает бинарное сохранение.");
-                }
+                memory.LoadFromBinary(fileName) ;
+
+                MessageBox.Show("Данные для  Memory успешно загружены.");
+
+                int[] inputs = new int[4];
+             
+                inputs = memory.GetInputs();
+
+                string inputsString = string.Join(", ", inputs);
+
+
+                TriggerInputs.Text = inputsString;
+
+
+
+
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка");
+            }
+
+
+
+
+        }
+        */
+
+
+        /*
+        private void LoadMemory_Click(object sender, RoutedEventArgs e)
+        {
+            string fileName = "memory_save.bin";
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Файл сохранения не найден.");
+                return;
+            }
+
+            try
+            {
+             
+                memory.LoadFromBinary(filePath);
+
+                MessageBox.Show("Данные для Memory успешно загружены.");
+
+               
+                int[] inputs = memory.GetInputs();
+
+               
+                string inputsString = string.Join(", ", inputs);
+
+             
+                TriggerInputs.Text = inputsString;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при сохранении: {ex.Message}");
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
-*/
+
+        */
+        private void LoadMemory_Click(object sender, RoutedEventArgs e)
+        {
+            string fileName = "memory_save.bin";
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Файл сохранения не найден.");
+                return;
+            }
+
+            try
+            {
+                // Загружаем данные из бинарного файла
+                memory.LoadFromBinary(filePath);
+
+                MessageBox.Show("Данные для Memory успешно загружены.");
+
+                // Получаем входные данные
+                int[] inputs = memory.GetInputs();
+
+                // Преобразуем массив в строку для отображения
+                string inputsString = string.Join(", ", inputs);
+
+                // Отображаем данные в UI
+                TriggerInputs.Text = inputsString;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
+        }
+
+
+
+
+
+
+    }
+
+}
+
+ 
