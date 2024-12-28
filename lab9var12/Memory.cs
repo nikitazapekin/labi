@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 public class Memory : Element
 {
     private int[] inputs;
+
+   
     public Memory(int inputCount) : base("Память", inputCount, 1)
     {
         inputs = new int[inputCount];

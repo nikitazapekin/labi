@@ -56,8 +56,6 @@ public abstract class Element : IInvertible
     }
 
 
-    public Element() { }
-
 
     public string Name => name;
     public int InputCount
@@ -89,17 +87,3 @@ public abstract class Element : IInvertible
 }
 
 
-/*
- * using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace lab9var12
-{
-    internal class Element
-    {
-    }
-}
-*/

@@ -18,6 +18,8 @@ namespace lab9var12
 {
     public partial class MainWindow : Window
     {
+        private Register register;
+
         private Combinational combinationalElement;
         private Memory memory;
 
@@ -27,6 +29,7 @@ namespace lab9var12
             InitializeComponent();
             combinationalElement = new Combinational(4);
             memory = new Memory(3);
+            register = new Register(4);
         }
 
         private void ComputeOutput_Click(object sender, RoutedEventArgs e)
@@ -63,59 +66,7 @@ namespace lab9var12
             return value;
         }
 
-        /*
-        private void SetInputs_Click(object sender, RoutedEventArgs e)
-        {
-            var inputs = TriggerInputs.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
- 
-
-            if (inputs.Length == 0  )
-            {
-                MessageBox.Show("Введите данные.");
-                return;
-            }
-            if (inputs.Length != 3)
-            {
-                MessageBox.Show("Введите 3 числа 1 или 0.");
-                return;
-            }
-
-
-                foreach (var input in inputs)
-            {
-                if (input != "1" && input != "0")
-                {
-                    MessageBox.Show("Все введенные значения должны быть либо 1, либо 0.");
-                    return;
-                }
-            }
-
-
-
-
-            int[] parsedInputs = new int[inputs.Length];
-
-            for (int i = 0; i < inputs.Length; i++)
-            {
-                if (!int.TryParse(inputs[i], out parsedInputs[i]))
-                {
-                    MessageBox.Show("Все значения должны быть числами.");
-                    return;
-                }
-            }
-
-            memory.SetInputs(parsedInputs);
-
-            TriggerValues.Text = $"Входы: {string.Join(" ", parsedInputs)}";
-
-
-
-
-
-
-        }
-        */
-
+   
 
         private void SetInputs_Click(object sender, RoutedEventArgs e)
         {
@@ -163,5 +114,74 @@ namespace lab9var12
 
 
 
+
+
+        /*
+        private void SetRandomTriggerButton(object sender, RoutedEventArgs e)
+        {
+          //  TriggerInputsArray.Text = "Регистры: wddwq";
+            try
+            {
+                int[][] parsedInputs;
+                parsedInputs = new int[3][];
+                parsedInputs[0] = new int[] { 1, 1, 1 };
+                parsedInputs[1] = new int[] { 1, 1, 0 };
+                parsedInputs[2] = new int[] { 1, 0, 1 };
+                parsedInputs[2] = new int[] { 0, 0, 1 };
+                register.SetInputs(parsedInputs);
+
+                var states = register.GetInputs();
+                string formattedInputs = "";
+                for (int i = 0; i < states.Length; i++)
+                {
+                    formattedInputs += $"[{states[i][0]}, {states[i][1]}, {states[i][2]}] ";
+                }
+                TriggerInputsArray.Text = "Регистры: " + formattedInputs;
+
+            } catch
+            {
+                MessageBox.Show("Ошибка.");
+            }
+            }
+
+        */
+
+
+
+        private void SetRandomTriggerButton(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int[][] parsedInputs = new int[4][];  // Исправлено: был дублирующий индекс
+                parsedInputs[0] = new int[] { 1, 1, 1 };
+                parsedInputs[1] = new int[] { 1, 1, 0 };
+                parsedInputs[2] = new int[] { 1, 0, 1 };
+                parsedInputs[3] = new int[] { 0, 0, 1 }; // Исправлено
+
+                register.SetInputs(parsedInputs);  // Применяем новые значения
+
+                var states = register.GetInputs();
+                string formattedInputs = "";
+                for (int i = 0; i < parsedInputs.Length; i++)
+                {
+                    formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
+                }
+
+                // Обновляем текст в UI
+                TriggerInputsArray.Text = "Регистры: " + formattedInputs;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка.");
+            }
+        }
+
+
+
+
+
+
     }
+    //   int[][] parsedInputs;
+
 }
