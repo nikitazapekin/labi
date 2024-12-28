@@ -56,10 +56,29 @@ public class Register : Element, IShiftable
 
     public override void Invert()
     {
-      
+        foreach (var memory in memories)
+        {
+            memory.Invert();
+        }
     }
- 
 
+    public void SetInputs(int[][] inputValues)
+    {
+        if (inputValues.Length != memories.Length)
+            throw new ArgumentException($"Ошибка: Размерность входных данных не совпадает с размером памяти.");
+
+        for (int i = 0; i < memories.Length; i++)
+        {
+            if (inputValues[i].Length != 3)
+                throw new ArgumentException($"Ошибка: Каждый входной массив должен иметь длину 3.");
+
+
+            inputs[i] = inputValues[i];
+            memories[i].SetInputs(inputValues[i]);
+        }
+    }
+
+    /*
     public void SetInputs(int[][] inputValues)
     {
         if (inputValues.Length != memories.Length)
@@ -77,6 +96,7 @@ public class Register : Element, IShiftable
       
     }
  
+    */
 
 
     public void Shift(int bits)

@@ -246,11 +246,65 @@ namespace lab9var12
 
 
 
+        //InvertRegister
+
+        /*
+
+        private void InvertRegister(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            int[][] parsedInputs = new int[4][];
+            combinationalElement.Invert();
+            parsedInputs = register.GetInputs();
+            string formattedInputs = "";
+            for (int i = 0; i < parsedInputs.Length; i++)
+            {
+                formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
+            }
+
+
+            TriggerInputsArray.Text = "Регистры: " + formattedInputs;
+            } catch
+            {
+                MessageBox.Show("Ошибка");
+            }
+
+        }
+        */
+
+
+        private void InvertRegister(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Выполнить инвертирование для всех элементов Register
+                register.Invert();
+
+                // Получить обновленные данные из Register
+                int[][] parsedInputs = register.GetInputs();
+
+                // Форматировать строку для отображения данных
+                string formattedInputs = "";
+                for (int i = 0; i < parsedInputs.Length; i++)
+                {
+                    formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
+                }
+
+                // Обновить текст в TriggerInputsArray для отображения инвертированных данных
+                TriggerInputsArray.Text = "Регистры: " + formattedInputs;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка инвертирования.");
+            }
+        }
+
 
 
 
 
     }
-    //   int[][] parsedInputs; SetTriggerIndexButton
 
 }
