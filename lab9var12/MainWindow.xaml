@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab9var12"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1250" Width="1800">
     <Grid>
-
+        <TextBlock Text="Введите значения входов (0 или 1):" Margin="0,0,0,10" />
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,30,0,0">
+            <TextBlock Text="Элемент1"  HorizontalAlignment="Center"  FontSize="22"  />
+            <TextBox Name="Input1" Width="200" Margin="0,5" FontSize="22"  />
+            <TextBlock Text="Элемент2"  HorizontalAlignment="Center"  FontSize="22"   />
+            <TextBox Name="Input2" Width="200" Margin="0,5"   FontSize="22" />
+            <TextBlock Text="Элемент3"   HorizontalAlignment="Center"   FontSize="22"  />
+            <TextBox Name="Input3" Width="200" Margin="0,5"   FontSize="22"  />
+            <TextBlock Text="Элемент4"  HorizontalAlignment="Center"  FontSize="22" />
+            <TextBox Name="Input4" Width="200" Margin="0,5"   FontSize="22"  />
+        </StackPanel>
+      
+        <TextBlock Name="OutputText" Margin="0,326,0,-126"   FontSize="16" Text="Результат" />
+        <Button Content="Вычислить"  FontSize="22" Click="ComputeOutput_Click" HorizontalAlignment="Left" Margin="36,419,0,0" VerticalAlignment="Top" Height="51" Width="297"/>
     </Grid>
 </Window>
