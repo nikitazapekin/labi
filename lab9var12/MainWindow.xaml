@@ -22,9 +22,11 @@
                 <TextBlock Name="OutputText"  HorizontalAlignment="Center"   FontSize="22" Text="Результат" />
                 <Button Content="Вычислить"  FontSize="22" Click="ComputeOutput_Click"  Margin="0,19,0,0" Height="51" Width="296"/>
                 <Button Content="Инвертировать"  FontSize="22" Click="InvertComb_Click"  Margin="0,19,0,0" Height="51" Width="296"/>
+                <Button Content="Сохранить входы"  FontSize="22" Click="SaveComb"  Margin="0,19,0,0" Height="51" Width="296"/>
+                <Button Content="Загрузить входы"  FontSize="22" Click="LoadComb"  Margin="0,19,0,0" Height="51" Width="296"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,530,0,0">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,730,0,0">
                 <TextBlock Text="Входы для триггера"  HorizontalAlignment="Center"  FontSize="22"  />
                 <TextBox Name="TriggerInputs" Width="200" Margin="0,5" FontSize="22"  />
                 <TextBlock Name="TriggerValues" Width="200" Margin="0,5"   FontSize="22" Text="Входы:"  />

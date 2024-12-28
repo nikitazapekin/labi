@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -299,11 +300,126 @@ namespace lab9var12
             {
                 MessageBox.Show("Ошибка");
             }
-            // Сдвигаем все значения вправо на 1 бит
-            //     register.Shift(-1);
+        
         }
+        private void  SaveComb(object sender, RoutedEventArgs e)
+
+        {
+         int[] inputs = new int[4];
+         //   inputs =
+
+                   try
+            {
+                string fileName = $"comb_save";
+                using (var writer = new StreamWriter(fileName))
+                {
+                    writer.WriteLine(combinationalElement.ToBinaryString());
+                }
+                MessageBox.Show($"Комбинированный элемент сохранен в файл: {fileName}");
+
+            } catch
+            {
+                MessageBox.Show("Ошибка");
+            }
+
+            }
+
+        private void LoadComb(object sender, RoutedEventArgs e)
+
+        {
+            string fileName = $"comb_save";
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
 
+
+
+
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Файл сохранения не найден.");
+                return;
+            }
+
+            try
+            {
+                string binaryData = File.ReadAllText(filePath);
+
+
+                combinationalElement.FromBinaryString(binaryData);
+
+                MessageBox.Show("Данные для Combinational успешно загружены.");
+
+                int[] inputs = new int[4];
+                inputs = combinationalElement.GetInputs();
+
+                Input1.Text = inputs[0].ToString();
+                Input2.Text = inputs[1].ToString();
+                Input3.Text = inputs[2].ToString();
+                Input4.Text = inputs[3].ToString();
+
+
+
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка");
+            }
+
+
+        }
     }
 
 }
+
+
+
+/*
+    private void SaveButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (currentElement == null)
+            {
+                MessageBox.Show("Нет выбранного элемента для сохранения.");
+                return;
+            }
+
+            try
+            {
+                string fileName = $"{currentElement.GetType().Name}_save";
+
+                if (currentElement is Combinational combinational)
+                {
+                    using (var writer = new StreamWriter(fileName))
+                    {
+                        writer.WriteLine(combinationalElement.ToBinaryString());
+                    }
+                    MessageBox.Show($"Комбинированный элемент сохранен в файл: {fileName}");
+                }
+                else if (currentElement is Register register)
+                {
+                    register.SaveToBinary(fileName);
+                    MessageBox.Show($"Регистр сохранен в файл: {fileName}");
+                }
+                else if (currentElement is Memory memory)
+                {
+                    try
+                    {
+                        memory.SaveToBinary(fileName);
+                        MessageBox.Show("Данные успешно сохранены в бинарный файл.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при сохранении: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Только Memory поддерживает бинарное сохранение.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}");
+            }
+        }
+*/
