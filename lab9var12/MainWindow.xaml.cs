@@ -112,40 +112,7 @@ namespace lab9var12
           TriggerOutput.Text = $"Выход: {memory.ComputeOutput()}";
         }
 
-
-
-
-
-        /*
-        private void SetRandomTriggerButton(object sender, RoutedEventArgs e)
-        {
-          //  TriggerInputsArray.Text = "Регистры: wddwq";
-            try
-            {
-                int[][] parsedInputs;
-                parsedInputs = new int[3][];
-                parsedInputs[0] = new int[] { 1, 1, 1 };
-                parsedInputs[1] = new int[] { 1, 1, 0 };
-                parsedInputs[2] = new int[] { 1, 0, 1 };
-                parsedInputs[2] = new int[] { 0, 0, 1 };
-                register.SetInputs(parsedInputs);
-
-                var states = register.GetInputs();
-                string formattedInputs = "";
-                for (int i = 0; i < states.Length; i++)
-                {
-                    formattedInputs += $"[{states[i][0]}, {states[i][1]}, {states[i][2]}] ";
-                }
-                TriggerInputsArray.Text = "Регистры: " + formattedInputs;
-
-            } catch
-            {
-                MessageBox.Show("Ошибка.");
-            }
-            }
-
-        */
-
+ 
 
 
         private void SetRandomTriggerButton(object sender, RoutedEventArgs e)
@@ -175,6 +142,87 @@ namespace lab9var12
                 MessageBox.Show("Ошибка.");
             }
         }
+        /*
+        private void SetTriggerIndexButton(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка.");
+            }
+
+        }
+        */
+
+        private void SetTriggerIndexButton(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+               
+                int triggerIndex = int.Parse(TriggerIndex.Text);
+ 
+                string[] triggerValues = TriggerRegisterValues.Text.Split(' ');
+
+               
+                if (triggerValues.Length != 3)
+                {
+                    MessageBox.Show("Ошибка: Введите 3 значения (0 или 1).");
+                    return;
+                }
+
+              
+                int[] parsedValues = new int[3];
+                for (int i = 0; i < 3; i++)
+                {
+                    parsedValues[i] = int.Parse(triggerValues[i]);
+
+               
+                    if (parsedValues[i] != 0 && parsedValues[i] != 1)
+                    {
+                        MessageBox.Show("Ошибка: Значения должны быть 0 или 1.");
+                        return;
+                    }
+                }
+
+               
+                if (triggerIndex < 0 || triggerIndex >= register.GetInputs().Length)
+                {
+                    MessageBox.Show("Ошибка: Индекс выходит за пределы массива.");
+                    return;
+                }
+
+               
+                var currentInputs = register.GetInputs();
+
+              
+                currentInputs[triggerIndex] = parsedValues;
+
+              
+                register.SetInputs(currentInputs);
+
+               
+                string formattedInputs = "";
+                foreach (var input in currentInputs)
+                {
+                    formattedInputs += $"[{input[0]}, {input[1]}, {input[2]}] ";
+                }
+
+               
+                TriggerInputsArray.Text = "Регистры: " + formattedInputs;
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Ошибка: Неверный формат ввода.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка: " + ex.Message);
+            }
+        }
+
 
 
 
@@ -182,6 +230,6 @@ namespace lab9var12
 
 
     }
-    //   int[][] parsedInputs;
+    //   int[][] parsedInputs; SetTriggerIndexButton
 
 }

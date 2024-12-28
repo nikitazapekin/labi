@@ -58,21 +58,40 @@ public class Register : Element, IShiftable
     {
         base.Invert();
     }
+    /*
+     public void SetInputs(int[][] inputValues)
+     {
+         if (inputValues.Length != memories.Length)
+             throw new ArgumentException($"Ошибка.");
+
+         for (int i = 0; i < memories.Length; i++)
+         {
+             if (inputValues[i].Length != 3)
+                 throw new ArgumentException($"Ошибка.");
+
+             inputs[i] = inputValues[i];
+          MessageBox.Show($"Регистр {i+1} после обновления: [{inputs[i][0]}, {inputs[i][1]}, {inputs[i][2]}]");
+         }
+     }
+    */
 
     public void SetInputs(int[][] inputValues)
     {
         if (inputValues.Length != memories.Length)
-            throw new ArgumentException($"Ошибка.");
+            throw new ArgumentException($"Ошибка: Размерность входных данных не совпадает с размером памяти.");
 
         for (int i = 0; i < memories.Length; i++)
         {
             if (inputValues[i].Length != 3)
-                throw new ArgumentException($"Ошибка.");
+                throw new ArgumentException($"Ошибка: Каждый входной массив должен иметь длину 3.");
 
             inputs[i] = inputValues[i];
-         MessageBox.Show($"Регистр {i+1} после обновления: [{inputs[i][0]}, {inputs[i][1]}, {inputs[i][2]}]");
         }
+
+        // Отладочная информация
+      
     }
+ 
 
 
     public void Shift(int bits)
