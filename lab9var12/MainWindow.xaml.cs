@@ -63,7 +63,7 @@ namespace lab9var12
             return value;
         }
 
-
+        /*
         private void SetInputs_Click(object sender, RoutedEventArgs e)
         {
             var inputs = TriggerInputs.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -106,7 +106,7 @@ namespace lab9var12
 
             memory.SetInputs(parsedInputs);
 
-
+            TriggerValues.Text = $"Входы: {string.Join(" ", parsedInputs)}";
 
 
 
@@ -114,5 +114,45 @@ namespace lab9var12
 
 
         }
+        */
+
+
+        private void SetInputs_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var inputs = TriggerInputs.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (inputs.Length != 3)
+                {
+                    MessageBox.Show("Введите ровно 3 числа (0 или 1).");
+                    return;
+                }
+
+                int[] parsedInputs = new int[inputs.Length];
+
+                for (int i = 0; i < inputs.Length; i++)
+                {
+                    if (!int.TryParse(inputs[i], out parsedInputs[i]) || (parsedInputs[i] != 0 && parsedInputs[i] != 1))
+                    {
+                        MessageBox.Show("Все значения должны быть либо 0, либо 1.");
+                        return;
+                    }
+                }
+
+               
+                memory.SetInputs(parsedInputs);
+
+            
+                TriggerValues.Text = $"Входы: {string.Join(" ", parsedInputs)}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+
     }
 }
