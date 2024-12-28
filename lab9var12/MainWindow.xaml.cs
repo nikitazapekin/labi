@@ -385,62 +385,7 @@ namespace lab9var12
             }
         }
 
-
-        /*
-        private void LoadMemory_Click(object sender, RoutedEventArgs e)
-        {
-
-
-
-
-            string fileName = "memory_save.bin";
-            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
-
-
-
-
-
-
-            if (!File.Exists(filePath))
-            {
-                MessageBox.Show("Файл сохранения не найден.");
-                return;
-            }
-
-            try
-            {
-                string binaryData = File.ReadAllText(filePath);
-
-                memory.LoadFromBinary(fileName) ;
-
-                MessageBox.Show("Данные для  Memory успешно загружены.");
-
-                int[] inputs = new int[4];
-             
-                inputs = memory.GetInputs();
-
-                string inputsString = string.Join(", ", inputs);
-
-
-                TriggerInputs.Text = inputsString;
-
-
-
-
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка");
-            }
-
-
-
-
-        }
-        */
-
-
-        /*
+         
         private void LoadMemory_Click(object sender, RoutedEventArgs e)
         {
             string fileName = "memory_save.bin";
@@ -454,7 +399,7 @@ namespace lab9var12
 
             try
             {
-             
+               
                 memory.LoadFromBinary(filePath);
 
                 MessageBox.Show("Данные для Memory успешно загружены.");
@@ -462,44 +407,9 @@ namespace lab9var12
                
                 int[] inputs = memory.GetInputs();
 
-               
+                
                 string inputsString = string.Join(", ", inputs);
-
-             
-                TriggerInputs.Text = inputsString;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}");
-            }
-        }
-
-        */
-        private void LoadMemory_Click(object sender, RoutedEventArgs e)
-        {
-            string fileName = "memory_save.bin";
-            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
-
-            if (!File.Exists(filePath))
-            {
-                MessageBox.Show("Файл сохранения не найден.");
-                return;
-            }
-
-            try
-            {
-                // Загружаем данные из бинарного файла
-                memory.LoadFromBinary(filePath);
-
-                MessageBox.Show("Данные для Memory успешно загружены.");
-
-                // Получаем входные данные
-                int[] inputs = memory.GetInputs();
-
-                // Преобразуем массив в строку для отображения
-                string inputsString = string.Join(", ", inputs);
-
-                // Отображаем данные в UI
+ 
                 TriggerInputs.Text = inputsString;
             }
             catch (Exception ex)
@@ -510,9 +420,72 @@ namespace lab9var12
 
 
 
+        private void SaveRegister(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string fileName = "register_save.bin";
+               register.SaveToBinary(fileName);
+                MessageBox.Show($"Элемены регистров  сохранен в файл: {fileName}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
+
+        }
 
 
 
+        private void LoadRegister(object sender, RoutedEventArgs e)
+        {
+
+            string fileName = "register_save.bin";
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Файл сохранения не найден.");
+                return;
+            }
+
+            try
+            {
+
+           register.LoadFromBinary(filePath);
+
+                MessageBox.Show("Данные для Register успешно загружены.");
+
+
+                /*    int[] inputs = memory.GetInputs();
+
+
+                    string inputsString = string.Join(", ", inputs);
+
+                    TriggerInputs.Text = inputsString; */
+
+
+                int[][] parsedInputs = register.GetInputs();
+
+
+                string formattedInputs = "";
+                for (int i = 0; i < parsedInputs.Length; i++)
+                {
+                    formattedInputs += $"[{parsedInputs[i][0]}, {parsedInputs[i][1]}, {parsedInputs[i][2]}] ";
+                }
+
+
+                TriggerInputsArray.Text = "Регистры: " + formattedInputs;
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
+
+        }
     }
 
 }

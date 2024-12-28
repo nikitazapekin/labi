@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,6 +140,66 @@ public class Register : Element, IShiftable
     {
         return inputs;
     }
+
+
+
+
+
+    public void LoadFromBinary(string fileName)
+    {
+        try
+        {
+            if (!File.Exists(fileName))
+                throw new FileNotFoundException("Файл не найден.");
+
+            using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            using (var reader = new BinaryReader(fs))
+            {
+
+                for (int i = 0; i < inputs.Length; i++)
+                {
+                    inputs[i][0] = reader.ReadInt32();
+                    inputs[i][1] = reader.ReadInt32();
+                    inputs[i][2] = reader.ReadInt32();
+                }
+            }
+
+            MessageBox.Show("Данные успешно загружены из бинарного файла.");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при загрузке бинарных данных: {ex.Message}");
+        }
+    }
+
+
+    public void SaveToBinary(string fileName)
+    {
+        try
+        {
+            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            using (var writer = new BinaryWriter(fs))
+            {
+
+                for (int i = 0; i < inputs.Length; i++)
+                {
+                    writer.Write(inputs[i][0]);
+                    writer.Write(inputs[i][1]);
+                    writer.Write(inputs[i][2]);
+                }
+            }
+            MessageBox.Show($"Данные успешно сохранены в файл: {fileName}");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при сохранении бинарных данных: {ex.Message}");
+        }
+    }
+
+
+
+
+
 
 }
 

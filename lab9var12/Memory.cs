@@ -67,54 +67,17 @@ public class Memory : Element
 
         }
     }
-    /*
  
-    public void SaveToBinary(string fileName)
-    {
-        using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-        using (var writer = new BinaryWriter(fs))
-        {
-           
-            writer.Write(inputs.Length);  
-            foreach (var input in inputs)
-            {
-                writer.Write(input);  
-            }
-
-           
-            writer.Write(Name);   
-        }
-    }
-    */
-
-    /*
-    
-    public void LoadFromBinary(string fileName)
-    {
-        if (!File.Exists(fileName))
-            throw new FileNotFoundException("Файл не найден.");
-
-        using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-        using (var reader = new BinaryReader(fs))
-        {
-            inputs[0] = reader.ReadInt32();
-            inputs[1] = reader.ReadInt32();
-            inputs[2] = reader.ReadInt32();
-        }
-    }
-
-    */
-
 
     public void SaveToBinary(string fileName)
     {
         using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
         using (var writer = new BinaryWriter(fs))
         {
-            // Сохраняем длину массива
+           
             writer.Write(inputs.Length);
 
-            // Сохраняем элементы массива
+         
             foreach (var input in inputs)
             {
                 writer.Write(input);
@@ -132,15 +95,14 @@ public class Memory : Element
 
         using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
         using (var reader = new BinaryReader(fs))
-        {
-            // Читаем длину массива
-            int length = reader.ReadInt32();  // Читаем размер массива
-            inputs = new int[length];  // Создаём новый массив нужного размера
+        { 
+            int length = reader.ReadInt32();  
+            inputs = new int[length];   
 
             // Читаем значения массива
             for (int i = 0; i < length; i++)
             {
-                inputs[i] = reader.ReadInt32();  // Читаем каждое значение
+                inputs[i] = reader.ReadInt32();  
             }
         }
     }
