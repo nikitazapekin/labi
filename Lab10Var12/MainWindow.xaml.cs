@@ -99,51 +99,74 @@ namespace Lab10Var12
 
         private void DrawCycloid()
         {
-            // Очищаем содержимое канвы
+          
             MainCanvas.Children.Clear();
 
             double canvasWidth = MainCanvas.ActualWidth;
             double canvasHeight = MainCanvas.ActualHeight;
-            //  double centerX = (canvasWidth / 2) -200 + offsetX;
-            double centerX = 0;
+           
+            double centerX =(canvasWidth /2) +offsetY;
             double centerY = (canvasHeight / 2) + offsetY;
-
-            // Создаем объект Polyline для графика циклоиды
+            UpdateScalingPoints(centerX, centerY);
+          
             Polyline cycloid = new Polyline
             {
                 Stroke = lineColor,
                 StrokeThickness = lineWidth
             };
 
-            const double a = 1.0; // Масштабный параметр для циклоиды
-            const int numPoints = 1000; // Количество точек
-            const double step = 0.01; // Шаг изменения t
+            const double a = 1.0;  
+            const int numPoints = 1000; 
+            const double step = 0.01; 
 
-            // Генерация точек циклоиды
+         
             for (int i = 0; i < numPoints; i++)
             {
                 double t = i * step;
                 double x = a * (t - Math.Sin(t)) * scale + centerX;
-                double y = -a * (1 - Math.Cos(t)) * scale + centerY; // Инвертируем Y для правильного направления на канве
+                double y = -a * (1 - Math.Cos(t)) * scale + centerY;  
 
                 cycloid.Points.Add(new Point(x, y));
             }
 
-            // Добавляем элементы на канву
-            MainCanvas.Children.Add(BackgroundImage); // Фон, если используется
+           
+            MainCanvas.Children.Add(GraphTitle);  
             MainCanvas.Children.Add(cycloid);
-            MainCanvas.Children.Add(GraphTitle); // Заголовок графика, если используется
+            MainCanvas.Children.Add(BackgroundImage);  
 
-            // Обновляем масштабируемые элементы
-       //     UpdateScalingPoints(centerX, centerY);
-
-            // Вызываем событие GraphBuilt
-            GraphBuilt?.Invoke(this, EventArgs.Empty);
+      
+        //    GraphBuilt?.Invoke(this, EventArgs.Empty);
         }
 
 
+        private void UpdateScalingPoints(double centerX, double centerY)
+        {
+            const double a = 1.0;
+            const int numPoints = 1000;
+            const double step = 0.01;
 
+            // Координаты начала линии (левая точка)
+            double tStart = 0.0;
+            double startX = a * (tStart - Math.Sin(tStart)) * scale + centerX;
+            double startY = -a * (1 - Math.Cos(tStart)) * scale + centerY;
 
+            // Координаты конца линии (правая точка)
+            double tEnd = (numPoints - 1) * step;
+            double endX = a * (tEnd - Math.Sin(tEnd)) * scale + centerX;
+            double endY = -a * (1 - Math.Cos(tEnd)) * scale + centerY;
+
+            // Координаты середины линии (зеленая точка)
+            double tMid = tEnd / 2;
+            double midX = a * (tMid - Math.Sin(tMid)) * scale + centerX;
+            double midY = -a * (1 - Math.Cos(tMid)) * scale + centerY;
+
+            // Обновляем точки
+            UpdatePoint(Brushes.Red, startX, startY);    // Красная точка (слева)
+            UpdatePoint(Brushes.Blue, endX, endY);      // Синяя точка (справа)
+            UpdatePoint(Brushes.Green, midX, midY);     // Зеленая точка (в середине)
+        }
+
+        /*
         private void UpdateScalingPoints(double centerX, double centerY)
         {
 
@@ -174,7 +197,7 @@ namespace Lab10Var12
 
             UpdatePoint(Brushes.Green, greenPointX, greenPointY);
         }
-
+        */
         private void UpdatePoint(Brush color, double x, double y)
         {
             Ellipse point = MainCanvas.Children.OfType<Ellipse>().FirstOrDefault(p => p.Fill == color);
