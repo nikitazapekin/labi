@@ -57,45 +57,7 @@ namespace Lab10Var12
 
         }
 
-        /*    private void DrawHyperbolicSpiral()
-            {
-                MainCanvas.Children.Clear();
-
-                double canvasWidth = MainCanvas.ActualWidth;
-                double canvasHeight = MainCanvas.ActualHeight;
-                double centerX = (canvasWidth / 2) - 200 + offsetX;
-                double centerY = canvasHeight / 2 + offsetY;
-
-
-                Polyline hyperbolicSpiral = new Polyline
-                {
-                    Stroke = lineColor,
-                    StrokeThickness = lineWidth
-                };
-
-                const double a = 1.0;
-                const int numPoints = 1000;
-
-                for (int i = 1; i <= numPoints; i++)
-                {
-                    double phi = i * 0.01;
-                    double radius = a / phi;
-
-                    double x = radius * Math.Cos(phi) * scale + centerX;
-                    double y = -radius * Math.Sin(phi) * scale + centerY;
-
-                    hyperbolicSpiral.Points.Add(new Point(x, y));
-                }
-                MainCanvas.Children.Add(BackgroundImage);
-                MainCanvas.Children.Add(hyperbolicSpiral);
-                MainCanvas.Children.Add(GraphTitle);
-
-                UpdateScalingPoints(centerX, centerY);
-            }
-        */
-
-
-
+      
 
         private void DrawCycloid()
         {
@@ -145,59 +107,28 @@ namespace Lab10Var12
             const int numPoints = 1000;
             const double step = 0.01;
 
-            // Координаты начала линии (левая точка)
+         
             double tStart = 0.0;
             double startX = a * (tStart - Math.Sin(tStart)) * scale + centerX;
             double startY = -a * (1 - Math.Cos(tStart)) * scale + centerY;
 
-            // Координаты конца линии (правая точка)
+          
             double tEnd = (numPoints - 1) * step;
             double endX = a * (tEnd - Math.Sin(tEnd)) * scale + centerX;
             double endY = -a * (1 - Math.Cos(tEnd)) * scale + centerY;
 
-            // Координаты середины линии (зеленая точка)
+          
             double tMid = tEnd / 2;
             double midX = a * (tMid - Math.Sin(tMid)) * scale + centerX;
             double midY = -a * (1 - Math.Cos(tMid)) * scale + centerY;
 
             // Обновляем точки
-            UpdatePoint(Brushes.Red, startX, startY);    // Красная точка (слева)
-            UpdatePoint(Brushes.Blue, endX, endY);      // Синяя точка (справа)
-            UpdatePoint(Brushes.Green, midX, midY);     // Зеленая точка (в середине)
+            UpdatePoint(Brushes.Gray, startX, startY);    
+            UpdatePoint(Brushes.Black, endX, endY);     
+            UpdatePoint(Brushes.Orange, midX, midY);    
         }
 
-        /*
-        private void UpdateScalingPoints(double centerX, double centerY)
-        {
-
-            double phi1 = 2.0;
-            double phi2 = 4.0;
-
-
-            const double a = 1.0;
-            double radius1 = a / phi1;
-            double radius2 = a / phi2;
-
-
-            double point1X = radius1 * Math.Cos(phi1) * scale + centerX;
-            double point1Y = -radius1 * Math.Sin(phi1) * scale + centerY;
-
-            double point2X = radius2 * Math.Cos(phi2) * scale + centerX;
-            double point2Y = -radius2 * Math.Sin(phi2) * scale + centerY;
-
-            UpdatePoint(Brushes.Red, point1X, point1Y);
-            UpdatePoint(Brushes.Blue, point2X, point2Y);
-
-
-            double greenPointPhi = 3.0;
-            double greenPointRadius = a / greenPointPhi;
-            greenPointX = greenPointRadius * Math.Cos(greenPointPhi) * scale + centerX;
-            greenPointY = -greenPointRadius * Math.Sin(greenPointPhi) * scale + centerY;
-
-
-            UpdatePoint(Brushes.Green, greenPointX, greenPointY);
-        }
-        */
+        
         private void UpdatePoint(Brush color, double x, double y)
         {
             Ellipse point = MainCanvas.Children.OfType<Ellipse>().FirstOrDefault(p => p.Fill == color);
@@ -245,20 +176,20 @@ namespace Lab10Var12
 
             if (Math.Abs(deltaY) > 0.1)
             {
-                if (currentScalingPoint.Fill == Brushes.Red)
+                if (currentScalingPoint.Fill == Brushes.Gray)
                 {
                     if (deltaY < 0) scale *= scaleFactor;
                     else scale /= scaleFactor;
                     lineColor = Brushes.Orange;
                 }
-                else if (currentScalingPoint.Fill == Brushes.Blue)
+                else if (currentScalingPoint.Fill == Brushes.Black)
                 {
                     if (deltaY > 0) scale *= scaleFactor;
                     else scale /= scaleFactor;
                     lineColor = Brushes.Orange;
                 }
 
-                if (currentScalingPoint.Fill == Brushes.Green)
+                if (currentScalingPoint.Fill == Brushes.Orange)
                 {
                     offsetX += currentMousePosition.X - previousMousePosition.X;
                     offsetY += currentMousePosition.Y - previousMousePosition.Y;
