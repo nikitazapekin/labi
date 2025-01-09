@@ -10,19 +10,18 @@
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
                    Margin="252,385,240,101">
             <Canvas x:Name="MainCanvas" Background="LightGray" 
-                 Width="1400" Height="800"
-                 Cursor="SizeAll">
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+                <Image x:Name="BackgroundImage" 
+           Panel.ZIndex="0"
+           Stretch="Fill"
+           Width="{Binding ActualWidth, ElementName=MainCanvas}" 
+           Height="{Binding ActualHeight, ElementName=MainCanvas}" />
                 <TextBlock Panel.ZIndex="3" x:Name="GraphTitle" Canvas.Left="20" Canvas.Top="20"
-                        FontSize="22" TextWrapping="Wrap" Text="Циклоида" />
-                <Image x:Name="BackgroundImage"  
-                    Stretch="Fill"
-                    Panel.ZIndex="0"
-    Canvas.Left="46" Canvas.Top="126"
-    Width="{Binding ActualWidth, ElementName=MainCanvas}"
-    Height="{Binding ActualHeight, ElementName=MainCanvas}"
-                    />
-
+               FontSize="22" TextWrapping="Wrap" Text="Циклоида" />
             </Canvas>
+
+
         </ScrollViewer>
 
         <StackPanel Margin="145,10,20,0" VerticalAlignment="Top" Orientation="Horizontal">

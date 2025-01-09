@@ -67,9 +67,8 @@ namespace Lab10Var12
             double canvasWidth = MainCanvas.ActualWidth;
             double canvasHeight = MainCanvas.ActualHeight;
            
-            double centerX =(canvasWidth /2) +offsetY;
+            double centerX =(canvasWidth /2) +offsetX;
             double centerY = (canvasHeight / 2) + offsetY;
-            UpdateScalingPoints(centerX, centerY);
           
             Polyline cycloid = new Polyline
             {
@@ -92,12 +91,12 @@ namespace Lab10Var12
             }
 
            
-            MainCanvas.Children.Add(GraphTitle);  
-            MainCanvas.Children.Add(cycloid);
             MainCanvas.Children.Add(BackgroundImage);  
+            MainCanvas.Children.Add(cycloid);
+            MainCanvas.Children.Add(GraphTitle);  
+            UpdateScalingPoints(centerX, centerY);
 
-      
-        //    GraphBuilt?.Invoke(this, EventArgs.Empty);
+       
         }
 
 
@@ -122,7 +121,7 @@ namespace Lab10Var12
             double midX = a * (tMid - Math.Sin(tMid)) * scale + centerX;
             double midY = -a * (1 - Math.Cos(tMid)) * scale + centerY;
 
-            // Обновляем точки
+            
             UpdatePoint(Brushes.Gray, startX, startY);    
             UpdatePoint(Brushes.Black, endX, endY);     
             UpdatePoint(Brushes.Orange, midX, midY);    
@@ -196,7 +195,7 @@ namespace Lab10Var12
                     lineColor = Brushes.Red;
                 }
                 DrawCycloid();
-           //     DrawHyperbolicSpiral();
+          
                 previousMousePosition = currentMousePosition;
             }
         }
@@ -210,7 +209,7 @@ namespace Lab10Var12
 
             currentScalingPoint?.ReleaseMouseCapture();
             currentScalingPoint = null;
-            //   DrawHyperbolicSpiral();
+         
             DrawCycloid();
         }
 
@@ -222,7 +221,7 @@ namespace Lab10Var12
 
         private void handleDraw(object sender, RoutedEventArgs e)
         {
-            //  DrawHyperbolicSpiral();
+           
             DrawCycloid();
         }
 
@@ -232,7 +231,7 @@ namespace Lab10Var12
         {
 
 
-            //    DrawHyperbolicSpiral();
+          
             DrawCycloid();
 
             OnGraphBuilt();
@@ -254,7 +253,7 @@ namespace Lab10Var12
             if (double.TryParse(GraphScaleTextBox.Text, out double newScale))
             {
                 scale = newScale;
-                //    DrawHyperbolicSpiral();
+          
                 DrawCycloid();
             }
             else
@@ -274,7 +273,7 @@ namespace Lab10Var12
             {
                 lineWidth = newWidth;
                 DrawCycloid();
-                //   DrawHyperbolicSpiral();
+              
             }
             else
             {
@@ -308,7 +307,7 @@ namespace Lab10Var12
                 lineColor = Brushes.Orange;
             }
             DrawCycloid();
-            //   DrawHyperbolicSpiral();
+          
         }
 
         private void graphText(object sender, TextChangedEventArgs e)
